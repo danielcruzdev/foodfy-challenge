@@ -26,6 +26,21 @@ server.get("/receitas", (req, res) => {
     return res.render("recipes", { recipes })
 });
 
+server.get("/receitas/:id", (req, res) => {
+  const id = req.params.id;
+
+  const receita = recipes.find((receita) => {
+    return receita.id == id;
+  });
+
+  if(!receita) {
+    return res.render('not-found')
+  };
+
+  return res.render('recipe', { receita })
+});
+
+
 server.listen(5000, () => {
   console.log("Server is running!");
 });
