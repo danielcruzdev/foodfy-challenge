@@ -241,10 +241,6 @@ main {
   text-align: justify;
 }
 
-.details-info {
-  margin-bottom: 39px;
-}
-
 .title-button-ingredients {
   width: 315px;
   height: 28px;
@@ -283,19 +279,22 @@ main {
   cursor: pointer;
   font-weight: bold;
 }
-
-.detail-list {
+.detail-content {
   color: #444444;
   font-size: 18px;
   line-height: 28px;
-  margin-top: 10px;
-  margin-left: 18px;
+  margin-bottom: 35px;
+  margin-top: 15px;
+  visibility: visible;
 }
 
-.detail-information {
-  color: #444444;
-  font-size: 18px;
-  line-height: 28px;
-  margin-top: -20px;
-  margin-bottom: 50px;
+.detail-content.hidden {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  line-height: 0;
+}
+
+.detail-content ul {
+  margin-left: 18px;
 }
