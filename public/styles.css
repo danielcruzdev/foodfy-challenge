@@ -19,25 +19,25 @@ body {
 }
 
 header {
-  margin: 35px 60px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  position: relative;
-  padding-bottom: 30px;
+  margin: 35px auto;
+  width: 900px;
+  height: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.logo {
+  width: 90px;
 }
 
 .logo img {
   width: 90px;
   height: 27px;
-  position: absolute;
-  left: 160px;
 }
 
 header .pages {
-  margin-left: 160px;
-  position: absolute;
-  left: 160px;
+  width: 300px;
+  margin-left: -350px;
 }
 
 header .pages a {
@@ -140,6 +140,10 @@ header .pages a:hover {
   color: #777777;
 }
 
+.content {
+  margin-left: 5px;
+}
+
 footer {
   background-color: #eeeeee;
   width: 100%;
@@ -176,68 +180,4 @@ footer p {
   font-size: 18px;
   line-height: 28px;
   margin-bottom: 20px;
-}
-
-/* ===== MODAL =====*/
-
-.modal-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal {
-  background-color: white;
-  width: 40%;
-  height: 50%;
-  margin: 15vh auto;
-  position: relative;
-  border-radius: 15px;
-}
-
-.modal .close-modal {
-  color: black;
-  position: absolute;
-  bottom: 20px;
-  right: 245px;
-  cursor: pointer;
-}
-
-.close-modal .close-button {
-  font-size: 14px;
-  line-height: 16px;
-  color: #777777;
-}
-
-.modal-content #image-modal {
-  margin: 0 auto;
-  margin-top: 25px;
-  object-fit:cover;
-  width: 490px;
-  height: 150px;
-  border-radius: 15px;
-}
-
-.modal-content #h2-modal {
-  margin-top: 15px;
-  font-size: 18px;
-  line-height: 28px;
-  color: black;
-  font-weight: lighter;
-}
-
-.modal-content #p-modal {
-  margin-top: 2px;
-  font-size: 14px;
-  line-height: 16px;
-  color: #777777;
 }

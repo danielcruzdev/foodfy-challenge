@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.njk" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <title>Foodfy</title>
-</head>
+{% block head %}
+<title>Sobre - Foodfy</title>
+{% endblock head %}
 
-<body>
-    <header>
-        <div class="logo">
-            <img src="assets/logo.png" alt="foodfy" />
-        </div>
-        <div class="pages">
-            <a href="index.html">Home</a>
-            <a href="about.html">Sobre</a>
-            <a href="recipes.html">Receitas</a>
-        </div>
-    </header>
+{% block content %}
     <section class="about-container">
         <div class="about">
             <h1>Sobre o Foodfy</h1>
@@ -65,9 +50,4 @@
             </p>
         </div>
     </section>
-    <footer>
-        <p>Todos os direitos reservados, receitas Foodfy. <br> 2020</p>
-    </footer>
-</body>
-
-</html
+{% endblock %}
