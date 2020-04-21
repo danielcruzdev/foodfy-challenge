@@ -82,6 +82,9 @@ Conforme o curso avança, o repositório é atualizado com as novas funções! F
 
 3. Execute `npm start` para iniciar a aplicação. Abra o navegador em (**http://localhost:5000/**)
 
+
+Desenvolvido com ❤️ por [Daniel Cruz](https://www.linkedin.com/in/danielafcruz/)
+
 <!-- links -->
 
 [Express]:https://expressjs.com/
