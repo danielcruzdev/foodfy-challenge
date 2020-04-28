@@ -3,7 +3,12 @@
 {% block content %}
 
 <section class="manager-recipes">
-    <h3>Gerenciar receitas</h3>
+    <div class="detail-text-container index">
+        <h3>Gerenciar receitas</h3>
+        <div class="button-edit index">
+            <a href="/admin/recipes/create">Nova receita</a>
+        </div>    
+    </div>
     <section class="cards">
         {% for recipe in recipes %}
         <div class="card">
@@ -13,7 +18,7 @@
             <div class="infos">
                 <h2>{{ recipe.title }}</h2>
                 <p>{{ recipe.author }}</p>
-                <a>Visualizar</a>
+                <a href="/admin/recipes/{{ recipe.id }}/">Visualizar</a>
             </div>
         </div>
         {% endfor %}

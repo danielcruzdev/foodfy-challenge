@@ -2,7 +2,6 @@
   "recipes": [
     {
       "id": 1,
-      "name": "burger",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/burger.png",
       "title": "Triplo bacon burger",
       "author": "Jorge Relato",
@@ -27,7 +26,6 @@
     },
     {
       "id": 2,
-      "name": "pizza",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/pizza.png",
       "title": "Pizza 4 estações",
       "author": "Fabiana Melo",
@@ -56,7 +54,6 @@
     },
     {
       "id": 3,
-      "name": "asinhas",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/asinha.png",
       "title": "Asinhas de frango ao barbecue",
       "author": "Vania Steroski",
@@ -75,7 +72,6 @@
     },
     {
       "id": 4,
-      "name": "lasanha",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/lasanha.png",
       "title": "Lasanha mac n' cheese",
       "author": "Juliano Vieira",
@@ -97,7 +93,6 @@
     },
     {
       "id": 5,
-      "name": "espaguete",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/macarrao.png",
       "title": "Espaguete ao alho",
       "author": "Júlia Kinoto",
@@ -123,7 +118,6 @@
     },
     {
       "id": 6,
-      "name": "doce",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/doce.png",
       "title": "Docinhos pão-do-céu",
       "author": "Ricardo Golvea",
@@ -144,6 +138,30 @@
         "açúcar de confeiteiro e corte em quadrados."
       ],
       "information": ""
+    },
+    {
+      "id": 7,
+      "image": "https://img.itdg.com.br/tdg/images/recipes/000/003/004/332796/332796_original.jpg?mode=crop&width=710&height=400",
+      "title": "Bolo de fubá com goiabada",
+      "author": "Rodrigo López",
+      "ingredients": [
+        "1 ovo",
+        "1 copo (americano) de leite",
+        "1 copo (americano) de fubá",
+        "1 copo (americano) de açucar",
+        "1/2 copo (americano) de óleo",
+        "1 copo (americano) farinha de trigo",
+        "1 colher de fermento em pó",
+        "goiabada em pedaços",
+        "erva-doce a gosto"
+      ],
+      "preparation": [
+        "Misture no liquidificador o ovo, o leite, o óleo, o açúcar, o fubá e bata bem.",
+        "Despeje a mistura em uma tigela, e misture com a farinha e o fermento em pó.",
+        "Despeje a massa em uma forma untada com manteiga e farinha, e acrescente uma camada de goiabada. Repita este processo até preencher toda a forma.",
+        "Leve ao forno médio (180° C), preaquecido, por 40 minutos."
+      ],
+      "information": "Procurando por mais receitas de bolos caseiros deliciosos? Confira no TudoGostoso como fazer bolo de milho cremoso, bolo simples, bolo de mandioca, bolo fofo de chocolate, bolo de cenoura e muitas outras receitas fáceis de fazer!  Veja também:  Bolos para o lanche: confira 16 receitas incríveis do TudoGostoso  Bolos fáceis de fazer: veja 30 receitas simples e práticas   "
     }
   ]
 }

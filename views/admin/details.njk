@@ -6,7 +6,9 @@
     <div class="detail-header">
         <div class="detail-text-container">
             <h3>Receita: {{ recipe.title }}</h3>
-            <a href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
+            <div class="button-edit">
+                <a href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
+            </div>    
         </div>
         <div class="detail-image-container">
             <img src="{{recipe.image}}" class="detail-image-container" />
@@ -36,11 +38,11 @@
                 <a>ESCONDER</a>
             </div>
             <div class="detail-content">
-                <ul>
+                <ol>
                     {% for step in recipe.preparation %}
                     <li>{{step}}</li>
                     {% endfor %}
-                </ul>
+                </ol>
             </div>
         </div>
         <div class="details-info">

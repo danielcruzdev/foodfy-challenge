@@ -70,7 +70,7 @@ header .pages a:hover {
   top: 120px;
   left: 80px;
   text-align: left;
-  width: 305px;
+  width: 345px;
 }
 
 .banner-texts h1 {
@@ -124,7 +124,7 @@ header .pages a:hover {
 
 .recipe-card img {
   width: 300px;
-  height: 140px;
+  height: 120px;
   border-radius: 15px;
   margin-bottom: 5px;
 }
@@ -252,12 +252,11 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
-
 .title-button-information {
   width: 545px;
   height: 28px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 8px;
 }
 

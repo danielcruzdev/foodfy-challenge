@@ -27,26 +27,24 @@ exports.post = (req, res) => {
     }
   }
 
-  let {avatar_url, birth, name, services, gender} = req.body
+  let {image, title, author, ingredients, preparation, information} = req.body
 
-  birth = Date.parse(birth)
-  const created_at = Date.now()
-  const id = Number( data.admin.length + 1 )
+  const id = Number( data.recipes.length + 1 )
 
-  data.admin.push({
+  data.recipes.push({
       id,
-      avatar_url,
-      name,
-      birth,
-      gender,
-      services,
-      created_at,
+      image,
+      title,
+      author,
+      ingredients,
+      preparation,
+      information
   });
 
   fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
     if (err) return res.send("Write file error!");
 
-    return res.redirect("/admin");
+    return res.redirect("/admin/recipes");
   });
 };
 
