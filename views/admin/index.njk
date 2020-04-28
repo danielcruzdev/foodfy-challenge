@@ -1,0 +1,23 @@
+{% extends "layoutAdmin.njk" %}
+
+{% block content %}
+
+<section class="manager-recipes">
+    <h3>Gerenciar receitas</h3>
+    <section class="cards">
+        {% for recipe in recipes %}
+        <div class="card">
+            <div class="image-container">
+                <img src="{{ recipe.image }}" alt="{{recipe.title}}"/>
+            </div>
+            <div class="infos">
+                <h2>{{ recipe.title }}</h2>
+                <p>{{ recipe.author }}</p>
+                <a>Visualizar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</section>
+
+{% endblock %}
