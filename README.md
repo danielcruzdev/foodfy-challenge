@@ -19,16 +19,10 @@ Conforme o curso avança, o repositório é atualizado com as novas funções! F
   - [x] Receitas
   - [x] Sobre
   - [x] Detalhes Receita
-- [ ] Funcionalidades
-  - [ ] Cadastrar
-    - [ ] Receita
-    - [ ] Chef
+- [] Funcionalidades
+  - [X] Cadastrar
   - [ ] Deletar
-    - [ ] Receita
-    - [ ] Chef
   - [ ] Atualizar
-    - [ ] Receita
-    - [ ] Chef
 - [ ] Banco de Dados
 
 ------
