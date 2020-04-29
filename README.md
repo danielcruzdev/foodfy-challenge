@@ -19,7 +19,7 @@ Conforme o curso avança, o repositório é atualizado com as novas funções! F
   - [x] Receitas
   - [x] Sobre
   - [x] Detalhes Receita
-- [] Funcionalidades
+- [ ] Funcionalidades
   - [X] Cadastrar
   - [ ] Deletar
   - [ ] Atualizar
