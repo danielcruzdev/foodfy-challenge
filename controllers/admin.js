@@ -51,7 +51,7 @@ exports.post = (req, res) => {
 exports.edit = (req, res) => {
   const { id } = req.params
 
-  const foundRecipe = data.admin.find((recipe) => {
+  const foundRecipe = data.recipes.find((recipe) => {
     return id == recipe.id
   })
 
@@ -72,16 +72,15 @@ exports.put = (req, res) => {
   const foundRecipe = data.recipes.find((recipe, foundIndex) => {
     if(id == recipe.id){
       index = foundIndex
-      return true
+      return true;
     }
-  })
+  });
 
   if(!foundRecipe) return res.render("admin/not-found")
 
   const recipe = {
     ...foundRecipe,
     ...req.body,
-    birth: Date.parse(req.body.birth),
     id: Number(req.body.id),
   }
 
@@ -90,7 +89,7 @@ exports.put = (req, res) => {
   fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
     if(err) return res.send("Write file error!")
 
-    return res.redirect(`admin/${id}`)
+    return res.redirect(`/admin/recipes/${id}`)
   })
 }
 
@@ -108,7 +107,7 @@ exports.delete = (req, res) => {
       return res.send("Write file error!");
     }
     else {
-      return res.redirect("/admin");
+      return res.redirect("/admin/recipes");
     }
     
   })

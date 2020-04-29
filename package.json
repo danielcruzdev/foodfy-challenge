@@ -30,6 +30,8 @@
     "nodemon": "^2.0.3"
   },
   "nodemonConfig": {
-    "ignore": ["data.json"]
+    "ignore": [
+      "data.json"
+    ]
   }
 }
