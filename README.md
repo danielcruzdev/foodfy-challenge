@@ -23,7 +23,7 @@ Conforme o curso avança, o repositório é atualizado com as novas funções! F
   - [X] Cadastrar
   - [X] Deletar
   - [X] Atualizar
-- [ ] Banco de Dados
+- [X] Banco de Dados
 
 ------
 ## 🖥️ Tecnologias e Frameworks
@@ -31,7 +31,7 @@ Conforme o curso avança, o repositório é atualizado com as novas funções! F
 ### **Backend:** 
 - [X] JavaScript - [NodeJS]
 - [x] Framework - [Express]
-- [ ] SQL Server - [PostgresSQL]
+- [X] SQL Server - [PostgresSQL]
 
 
 ### **Frontend:** 
