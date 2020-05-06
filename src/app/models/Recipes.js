@@ -4,19 +4,19 @@ const db = require('../../config/db')
 
 module.exports = {
     all(callback) {
-      db.query(`SELECT *,
+      db.query(`SELECT *
       FROM recipes
-      ORDER BY name ASC`, (err, results) => {
+      ORDER BY title ASC
+      `, (err, results) => {
         if(err) throw `Database Error! ${err}`
   
         callback(results.rows)
       })
     },
     allIndex(callback) {
-      db.query(`SELECT *,
+      db.query(`SELECT *
       FROM recipes
-      LIMIT 6
-      ORDER BY name ASC`, (err, results) => {
+      ORDER BY title ASC`, (err, results) => {
         if(err) throw `Database Error! ${err}`
   
         callback(results.rows)
@@ -131,7 +131,7 @@ module.exports = {
       if(filter){
   
         filterQuery = `
-        WHERE recipes.name ILIKE '%${filter}%'   
+        WHERE recipes.title ILIKE '%${filter}%'   
         `
   
         totalQuery = `(

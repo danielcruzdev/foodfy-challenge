@@ -3,27 +3,9 @@ const { date } = require('../../lib/utils')
 
 module.exports = {
     index(req, res) {
-        let { filter, page, limit } = req.body
-
-        page = page || 1
-        limit = limit || 12
-        let offset = limit * ( page - 1 )
-
-        const params = {
-            filter,
-            page,
-            limit,
-            offset,
-            callback(recipes){
-                const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
-                    page
-                }
-                return res.render("admin/index", {recipes, pagination, filter})
-            }
-        }
-
-        Recipe.paginate(params)
+        Recipe.allIndex((recipes) => {
+            return res.render('admin/index', { recipes })
+        })
     },
     create(req ,res) {
         Recipe.chefSelectOptions((options) => {
@@ -31,7 +13,7 @@ module.exports = {
         })
     },
     post(req, res) {
-        const keys = Object.keys(req,body);
+        const keys = Object.keys(req.body);
 
         for(key in keys){
             if(req.body[key] == ""){

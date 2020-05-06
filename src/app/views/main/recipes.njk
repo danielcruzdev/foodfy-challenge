@@ -7,6 +7,10 @@
 {% block content %}
 
 <section class="most-accessed">
+    <form action="/recipes" method="GET">
+        <input type="text" name="filter" placeholder="Nome ou especialidade" value={{filter}}>
+        <button type="submit">Filtrar</button>
+    </form>
     <div class="recipes-cards">
     {% for recipe in recipes %}
         <div class="recipe-card" id="{{recipe.id}}">
@@ -15,7 +19,7 @@
             </div>
             <div class="content">
                 <h2>{{recipe.title}}</h2>
-                <p>{{recipe.author}}</p>
+                <p>{{recipe.chef_name}}</p>
             </div>
         </div>
     {% endfor %}
