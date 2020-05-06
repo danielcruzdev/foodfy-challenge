@@ -46,3 +46,16 @@
         <textarea type="text" name="information">{{ recipe.information }}</textarea>
     </div>
 </div>
+
+<div class="item">
+    <div>Chef</div>
+    <div>
+        <select name="chef">
+            {% for chef in chefOptions%}
+            <option value="{{chef.id}}" 
+                {% if recipe.chef_id == chef.id %} selected {% endif %}>{{chef.name}}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

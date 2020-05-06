@@ -12,6 +12,16 @@ module.exports = {
         callback(results.rows)
       })
     },
+    allIndex(callback) {
+      db.query(`SELECT *,
+      FROM recipes
+      LIMIT 6
+      ORDER BY name ASC`, (err, results) => {
+        if(err) throw `Database Error! ${err}`
+  
+        callback(results.rows)
+      })
+    },
     create(data, callback) {
   
       const query = `
@@ -47,9 +57,10 @@ module.exports = {
     },
     find(id, callback) {
       db.query(`
-      SELECT * 
+      SELECT recipes.*, chefs.name AS chef_name 
       FROM recipes 
-      WHERE id = $1`, [id], (err, results) => {
+      LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+      WHERE recipe.id = $1`, [id], (err, results) => {
         if(err) throw `Database Error! ${err}`
         callback(results.rows[0])
       })
