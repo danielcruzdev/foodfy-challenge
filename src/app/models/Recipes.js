@@ -60,7 +60,7 @@ module.exports = {
       SELECT recipes.*, chefs.name AS chef_name 
       FROM recipes 
       LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-      WHERE recipe.id = $1`, [id], (err, results) => {
+      WHERE recipes.id = $1`, [id], (err, results) => {
         if(err) throw `Database Error! ${err}`
         callback(results.rows[0])
       })
@@ -82,7 +82,7 @@ module.exports = {
         image=($2),
         title=($3),
         ingredients=($4),
-        praparation=($5),
+        preparation=($5),
         information=($6)
       WHERE id = $7
       `

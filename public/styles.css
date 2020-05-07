@@ -25,18 +25,9 @@ header {
   width: 900px;
   height: 30px;
   display: grid;
-  grid-template-columns: 91px 500px;
+  grid-template-columns: 91px 400px 1fr ;
+  align-items: center;
 }
-
-.logo {
-  width: 90px;
-}
-
-.logo img {
-  width: 90px;
-  height: 27px;
-}
-
 
 header .pages a {
   text-decoration: none;
@@ -44,12 +35,48 @@ header .pages a {
   color: black;
   line-height: 19px;
   margin-left: 35px;
-  border-bottom: 2px solid #fbdfdb;
 }
 
 header .pages a:hover {
   font-size: 19px;
 }
+
+header .filter form {
+  display: grid;
+  grid-template-columns: 250px 100px;
+  margin-left: 70px;
+  gap: 5px;
+  align-items: center;
+  visibility: visible;
+}
+
+.filter.hidden {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  line-height: 0;
+}
+
+
+header .filter form input {
+  width: 246px;
+  height: 37px;
+  font-size: 16px;
+  border: 1px solid #DDDDDD;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+header .filter form button {
+  width: 91px;
+  height: 37px;
+  border-radius: 4px;
+  background-color: #6558C3;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+}
+
 
 /* ======BANNER====== */
 
@@ -60,7 +87,7 @@ header .pages a:hover {
   margin: 0 auto;
   border-radius: 30px;
   display: grid;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   grid-template-columns: 1fr 1fr;
   position: relative;
 }
@@ -81,10 +108,10 @@ header .pages a:hover {
 }
 
 .banner-texts p {
-  width: 316px;
+  width: 325px;
   height: 84px;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 30px;
   opacity: 70%;
   color: black;
 }

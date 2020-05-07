@@ -1,5 +1,14 @@
 {% extends "layoutMain.njk" %}
 
+{% block filter %}
+<div class="filter">
+    <form action="/recipes" method="GET">
+        <input type="text" name="filter" placeholder="Buscar uma receita" value={{filter}}>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+{% endblock %}
+
 {% block content %}
 
     <section class="banner">
@@ -12,6 +21,7 @@
         </div>
     </section>
     <section class="most-accessed">
+        <h1>Mais Acessadas</h1>
         <div class="recipes-cards">
             {% for recipe in recipes %}
                 <div class="recipe-card" id="{{recipe.id}}">
@@ -26,5 +36,6 @@
             {% endfor %}
         </div>
     </section>
+
 
 {% endblock content %}

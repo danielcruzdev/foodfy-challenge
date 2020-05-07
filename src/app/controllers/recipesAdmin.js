@@ -44,7 +44,7 @@ module.exports = {
         })
     },
     put(req, res) {
-        const keys = Object.keys(req,body);
+        const keys = Object.keys(req.body);
 
         for(key in keys){
             if(req.body[key] == ""){

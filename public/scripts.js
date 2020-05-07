@@ -60,3 +60,4 @@ function addPreparation() {
 document
   .querySelector(".add-preparation")
   .addEventListener("click", addPreparation);
+

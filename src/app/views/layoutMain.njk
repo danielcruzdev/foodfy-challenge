@@ -17,9 +17,12 @@
             <img src="/assets/logoBlack.png" alt="foodfy" />
         </div>
         <div class="pages">
+            <a href="/">Home</a>
+            <a href="/sobre">Sobre</a>
             <a href="/receitas">Receitas</a>
             <a href="/chefs">Chefs</a>
         </div>
+        {% block filter%} {% endblock %}
     </header>
 
     {% block content%} {% endblock %}

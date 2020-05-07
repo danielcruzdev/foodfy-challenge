@@ -29,7 +29,7 @@ header .header {
   width: 940px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 90px 400px;
+  grid-template-columns: 90px 300px;
   gap: 45px;
 }
 
@@ -38,7 +38,7 @@ header .header {
   color: white;
   text-decoration: none;
   font-size: 20px;
-  margin-left: 25px;
+  margin-left: 35px;
 }
 
 /* INDEX */
@@ -298,6 +298,7 @@ form {
 .details .item {
   text-align: left;
   padding: 15px 0px 15px 0px;
+  box-sizing: border-box;
 }
 
 .details .item div:first-child {
@@ -311,6 +312,19 @@ input {
   width: 100%;
   height: 40px;
   outline: 1px solid rgb(194, 191, 191);
+  color: #333;
+  font-size: 16px;
+  padding-left: 12px;
+  outline-style: double;
+  box-shadow: 2px 2px 1px rgba(90, 90, 90, 0.582);
+  box-sizing: border-box;
+}
+
+select {
+  width: 100%;
+  height: 40px;
+  outline: 1px solid rgb(194, 191, 191);
+  background-color: white;
   color: #333;
   font-size: 16px;
   padding-left: 12px;
