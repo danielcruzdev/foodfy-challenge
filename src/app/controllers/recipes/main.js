@@ -1,9 +1,9 @@
-const Recipe = require('../models/Recipes')
-const { date } = require('../../lib/utils')
+const Recipe = require('../../models/Recipes')
+const { date } = require('../../../lib/utils')
 
 module.exports = {
     index(req, res) {
-        Recipe.allIndex((recipes) => {
+        Recipe.index((recipes) => {
             return res.render('main/home', { recipes })
         })
     },
@@ -11,8 +11,8 @@ module.exports = {
         return res.render('main/about')
     },
     showAll(req, res) {
-        Recipe.all((recipes) => {
-            return res.render('main/recipes', { recipes })
+        Recipe.all((recipes) => {         
+                return res.render('main/recipes', { recipes })
         })
     },
     show(req, res) {

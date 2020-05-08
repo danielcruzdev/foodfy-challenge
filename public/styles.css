@@ -22,7 +22,7 @@ body {
 
 header {
   margin: 35px auto;
-  width: 900px;
+  width: 940px;
   height: 30px;
   display: grid;
   grid-template-columns: 91px 400px 1fr ;
@@ -48,13 +48,6 @@ header .filter form {
   gap: 5px;
   align-items: center;
   visibility: visible;
-}
-
-.filter.hidden {
-  height: 0;
-  opacity: 0;
-  visibility: hidden;
-  line-height: 0;
 }
 
 
@@ -154,6 +147,7 @@ header .filter form button {
   height: 120px;
   border-radius: 15px;
   margin-bottom: 5px;
+  object-fit: cover;
 }
 
 .recipe-card h2 {
@@ -237,6 +231,7 @@ main {
   width: 940px;
   height: 280px;
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .detail-info-container {
@@ -320,4 +315,156 @@ main {
 
 .detail-content ul {
   margin-left: 18px;
+}
+
+
+/* CHEFS PAGE */
+
+.all-chefs-section {
+  width: 940px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+.all-chefs-section h1 {
+  font-size: 24px;
+  color: black;
+  text-align: left;
+  padding-bottom: 20px;
+
+  box-sizing: border-box;
+}
+
+.chefs-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.chef-card {
+  display: grid;
+  grid-template-columns: 65px 1fr;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.chefs-cards .chef-name {
+  text-align: left;
+}
+
+.chefs-cards .chef-name p {
+  font-size: 18px;
+  line-height: 21px;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.chefs-cards .chef-name a {
+  color: #6558C3;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.chef-card .chef-photo img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chefs-cards .chef-card .chef-name .total-recipes {
+  font-size: 14px;
+  color: #777777;
+  margin-bottom: 1px;
+}
+
+
+/* details PAGE CHEFS */
+
+.chef-details-container {
+  margin-top: 45px;
+  align-items: center;
+}
+
+.chef-details-container .chef-avatar {
+  justify-self: right;
+}
+
+.chef-details-container .chef-avatar img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chef-details-container .chef-details-profile {
+  justify-self: left;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.chef-details-profile h3 {
+  font-size: 25px;
+  padding-bottom: 8px;
+}
+
+.chef-details-profile p {
+  font-size: 19px;
+  color: #444444;
+}
+
+.cards-recipes-chefs {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.card-recipe {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card-recipe .image-recipe-container {
+  justify-self: center;
+}
+
+.card-recipe .image-recipe-container img {
+  width: 172px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card-recipe .infos-recipe-container {
+  justify-self: left;
+  text-align: left;
+}
+
+.card-recipe .infos-recipe-container h2 {
+  font-size: 18px;
+  line-height: 21px;
+  padding-bottom: 8px;
+}
+
+.card-recipe .infos-recipe-container p {
+  font-size: 14px;
+  line-height: 16px;
+  padding-bottom: 3px;
+  color: #777777;
+}
+
+.card-recipe .infos-recipe-container a {
+  font-size: 14px;
+  line-height: 16px;
+  color: #6558C3;
+  text-decoration: none;
 }

@@ -1,0 +1,21 @@
+{% extends "layoutAdmin.njk" %} 
+
+{% block content %}
+
+<form class="card-form" method="POST" action="/admin/chefs">
+  <section class="details">
+    <div class="detail-text-container index">
+      <h3>Cadastrar chef</h3>
+      <div class="button-edit index save">
+          <button type="submit">Salvar</button>
+      </div>    
+    </div>
+
+    {% include 'admin/chefs/fields.njk' %}
+
+  </section>
+</form>
+
+<script src="/scripts.js"></script>
+
+{% endblock content %}

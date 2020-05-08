@@ -1,0 +1,41 @@
+{% extends "layoutMain.njk" %}
+
+{% block content %}
+
+<main>
+    <div class="detail-header">
+        <div class="chef-details-container">
+            <div class="chef-avatar">
+                <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
+            </div>
+            <div class="chef-details-profile">
+                <h3>{{chef.name}}</h3>
+                <p>{{chef.total_recipes}} 
+                    {% if chef.total_recipes < 2 %} 
+                        receita 
+                    {% else %}
+                        receitas
+                    {% endif %}              
+                </p>
+            </div>
+        </div>
+        <section class="cards-recipes-chefs">
+            {% for recipe in recipes %}
+            <div class="card-recipe">
+                <div class="image-recipe-container">
+                    <img src="{{ recipe.image }}" alt="{{recipe.title}}"/>
+                </div>
+                <div class="infos-recipe-container">
+                    <h2>{{ recipe.title }}</h2>
+                    <p>por {{chef.name}} </p>
+                    <a href="/recipes/{{ recipe.id }}/">Visualizar</a>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</main>
+
+<script src="/scripts.js"></script>
+
+{% endblock %}

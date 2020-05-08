@@ -1,15 +1,15 @@
-const Recipe = require('../models/Recipes')
-const { date } = require('../../lib/utils')
+const Recipe = require('../../models/Recipes')
+const { date } = require('../../../lib/utils')
 
 module.exports = {
     index(req, res) {
-        Recipe.allIndex((recipes) => {
+        Recipe.all((recipes) => {
             return res.render('admin/index', { recipes })
         })
     },
     create(req ,res) {
         Recipe.chefSelectOptions((options) => {
-            return res.render('admin/create', {chefOptions: options})
+            return res.render('admin/recipes/create', {chefOptions: options})
         })
     },
     post(req, res) {
@@ -22,7 +22,7 @@ module.exports = {
         }
 
         Recipe.create(req.body, (recipe) => {
-            return res.redirect(`/admin/recipe/${recipe.id}`)
+            return res.redirect(`/admin/recipes/${recipe.id}`)
         })
     },
     show(req, res) {
@@ -31,7 +31,7 @@ module.exports = {
 
             recipe.created_at = date(recipe.created_at).format
 
-            return res.render("admin/details", { recipe })
+            return res.render("admin/recipes/details", { recipe })
         })
     },
     edit(req, res) {
@@ -39,7 +39,7 @@ module.exports = {
             if(!recipe) return res.send("Recipe not found!")
 
             Recipe.chefSelectOptions((options) => {
-                return res.render('admin/edit', { recipe, chefSelectOptions: options})
+                return res.render('admin/recipes/edit', { recipe, chefSelectOptions: options})
             })
         })
     },
@@ -53,7 +53,7 @@ module.exports = {
         }
 
         Recipe.update(req.body, () => {
-            return res.redirect(`admin/recipe/${req.body.id}`)
+            return res.redirect(`/admin/recipes/${req.body.id}`)
         })
     },
     delete(req, res) {

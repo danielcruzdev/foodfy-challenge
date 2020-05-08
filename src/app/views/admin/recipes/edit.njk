@@ -4,16 +4,16 @@
 
   <div class="card-form">
     <section class="details">
-      <form method="POST" action="/recipes?_method=PUT">
+      <form method="POST" action="/admin/recipes?_method=PUT">
         <h3>Editar: {{ recipe.title }}</h3>
 
-        {% include 'admin/fieldsEdit.njk' %}
+        {% include 'admin/recipes/fieldsEdit.njk' %}
 
         <input type="hidden" name="id" value="{{ recipe.id }}"/>
         <button id="button-save" type="submit">Salvar</button>
       </form>
 
-      <form id='form-delete' action="/recipes?_method=DELETE" method="POST">
+      <form id='form-delete' action="/admin/recipes?_method=DELETE" method="POST">
         <input type="hidden" name="id" value="{{ recipe.id }}"/>
         <button id='button-delete' type="submit">Deletar</button>
       </form>

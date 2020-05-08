@@ -1,0 +1,40 @@
+{% extends "layoutMain.njk" %}
+
+{% block head %}
+<title>Chefs - Foodfy</title>
+{% endblock head %}
+
+{% block filter %}
+<div class="filter">
+    <form action="/chefs" method="GET">
+        <input type="text" name="filter" placeholder="Buscar um chef" value={{filter}}>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<section class="all-chefs-section">
+    <h1>Chefs</h1>
+    <div class="chefs-cards">
+    {% for chef in chefs %}
+        <div class="chef-card" id="{{chef.id}}">
+            <div class="chef-photo">
+                <img src="{{chef.avatar_url}}" alt="{{chef.name}}"/>
+            </div>
+            <div class="chef-name">
+                <p>{{chef.name}}</p>
+                <p class="total-recipes">{{chef.total_recipes}} 
+                    {% if chef.total_recipes < 2 %} 
+                        receita 
+                    {% else %}
+                        receitas
+                    {% endif %}  </p>
+                <a href='/chefs/{{ chef.id }}'>Visualizar</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %}

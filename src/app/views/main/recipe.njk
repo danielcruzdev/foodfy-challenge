@@ -5,11 +5,11 @@
 <main>
     <div class="detail-header">
         <div class="detail-image-container">
-            <img src="{{receita.image}}" class="detail-image-container" />
+            <img src="{{recipe.image}}" class="detail-image-container" />
         </div>
         <div class="detail-info-container">
-            <h2>{{receita.title}}</h2>
-            <p>por {{receita.chef_name}}</p>
+            <h2>{{recipe.title}}</h2>
+            <p>por {{recipe.chef_name}}</p>
         </div>
     </div>
     <div class="details-recipe">
@@ -20,7 +20,7 @@
             </div>
             <div class="detail-content">
                 <ul>
-                    {% for ingredient in receita.ingredients %}
+                    {% for ingredient in recipe.ingredients %}
                     <li>{{ingredient}}</li>
                     {% endfor %}
                 </ul>
@@ -33,7 +33,7 @@
             </div>
             <div class="detail-content">
                 <ol>
-                    {% for step in receita.preparation %}
+                    {% for step in recipe.preparation %}
                     <li>{{step}}</li>
                     {% endfor %}
                 </ol>
@@ -45,7 +45,7 @@
                 <a>ESCONDER</a>
             </div>
             <div class="detail-content">
-                <p>{{ receita.information }}</p>
+                <p>{{ recipe.information }}</p>
             </div>
         </div>    
     </div>
