@@ -20,30 +20,9 @@ module.exports = {
         return res.render('main/about')
     },
     showAll(req, res) {
-        let { filter, page, limit } = req.query
-
-        page = page || 1 
-        limit = limit || 12
-        let offset = limit * (page - 1)
-
-        const params = {
-            filter,
-            page,
-            limit,
-            offset,
-            callback(recipes) {
-
-                const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
-                    page
-                }
-
-                return res.render('main/recipes', { recipes, filter, pagination })
-
-            }
-        }
-
-        Recipe.paginate(params)
+        Recipe.all((recipes) => {         
+                return res.render('main/recipes', { recipes })
+        })
     },
     show(req, res) {
         Recipe.find(req.params.id, (recipe) => {

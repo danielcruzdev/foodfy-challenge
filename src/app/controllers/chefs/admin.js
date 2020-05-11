@@ -37,9 +37,7 @@ module.exports = {
         Chef.find(req.params.id, (chef) => {
             if (!chef) return res.send("Chef not found!")
 
-            Chef.recipeSelectOptions((options) => {
-                return res.render('admin/chefs/edit', { chef, chefSelectOptions: options })
-            })
+            return res.render('admin/chefs/edit', { chef })
         })
     },
     put(req, res) {

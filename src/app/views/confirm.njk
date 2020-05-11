@@ -1,10 +1,28 @@
-
 <script>
-    const formDelete = document.querySelector("#form-delete")
-    formDelete.addEventListener("submit", (event) => {
-      const confirmation = confirm(`Deseja deletar?`)
-      if(!confirmation) {
-        event.preventDefault()
+  const formDelete = document.querySelector("#form-delete");
+  const totalRecipes = document.querySelector("#checkRecipes").value;
+
+  console.log(totalRecipes)
+
+  formDelete.addEventListener("submit", (event) => {
+    if (totalRecipes >= 1) {
+      if(totalRecipes == 1){
+        alert(`Esse chefe tem ${totalRecipes} receita cadastrada!`)
+        alert("Apague a receita para deletar o chefe!")
+        event.preventDefault();
       }
-    })
+      else {
+        alert(`Esse chefe tem ${totalRecipes} receitas cadastradas!`)
+        alert("Apague as receitas para deletar o chefe!")
+        event.preventDefault();
+      }
+    }
+    else{
+      const confirmation = confirm(`Deseja deletar?`);
+      if (!confirmation) {
+        event.preventDefault();
+      }
+    }
+  });
+
 </script>
