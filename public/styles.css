@@ -120,7 +120,8 @@ header .filter form button {
   width: 940px;
   margin: 0 auto;
   text-align: left;
-  padding-bottom: 60px;
+  box-sizing: border-box;
+  padding: 30px 0 20px 0;
 }
 
 .most-accessed h1 {
@@ -472,7 +473,7 @@ main {
   margin: 0;
   align-self: end;
   justify-self: center;
-  text-align: center;
+  padding-bottom: 40px;
 }
 
 .pagination a, 
