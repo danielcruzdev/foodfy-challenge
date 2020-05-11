@@ -1,36 +1,42 @@
-{% extends "layoutMain.njk" %}
-
-{% block head %}
+{% extends "layoutMain.njk" %} {% block head %}
 <title>Receitas - Foodfy</title>
-{% endblock head %}
-
-{% block filter %}
+{% endblock head %} {% block filter %}
 <div class="filter">
-    <form action="/recipes" method="GET">
-        <input type="text" name="filter" placeholder="Buscar uma receita" value={{filter}}>
-        <button type="submit">Buscar</button>
-    </form>
+  <form action="/receitas" method="GET">
+    <input
+      type="text"
+      name="filter"
+      placeholder="Buscar uma receita"
+      value="{{ filter }}"
+    />
+    <button type="submit">Buscar</button>
+  </form>
 </div>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 
 <section class="most-accessed">
-    <div class="recipes-cards">
+  <div class="recipes-cards">
     {% for recipe in recipes %}
-        <div class="recipe-card" id="{{recipe.id}}">
-            <div class="image-container">
-                <img src="{{recipe.image}}" alt="{{recipe.title}}"/>
-            </div>
-            <div class="content">
-                <h2>{{recipe.title}}</h2>
-                <p>{{recipe.chef_name}}</p>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="recipe-card" id="{{ recipe.id }}">
+      <div class="image-container">
+        <img src="{{ recipe.image }}" alt="{{ recipe.title }}" />
+      </div>
+      <div class="content">
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.chef_name }}</p>
+      </div>
     </div>
+    {% endfor %}
+  </div>
+  
+  <div
+    class="pagination"
+    data-page="{{ pagination.page }}"
+    data-limit="{{ pagination.limit }}"
+    data-filter="{{ filter }}"
+  ></div>
 </section>
 
 <script src="/scripts.js"></script>
 
-{% endblock %}
+{% endblock content %}

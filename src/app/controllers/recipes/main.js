@@ -3,17 +3,47 @@ const { date } = require('../../../lib/utils')
 
 module.exports = {
     index(req, res) {
-        Recipe.index((recipes) => {
-            return res.render('main/home', { recipes })
-        })
+        const { filter } = req.query
+
+        if (filter) {
+            Recipe.findBy(filter, (recipes) => {
+                return res.render('main/recipes', { recipes })
+            })
+        } else {
+            Recipe.index((recipes) => {
+                return res.render('main/home', { recipes })
+            })
+        }
+
     },
     about(req, res) {
         return res.render('main/about')
     },
     showAll(req, res) {
-        Recipe.all((recipes) => {         
-                return res.render('main/recipes', { recipes })
-        })
+        let { filter, page, limit } = req.query
+
+        page = page || 1 
+        limit = limit || 12
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes) {
+
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page
+                }
+
+                return res.render('main/recipes', { recipes, filter, pagination })
+
+            }
+        }
+
+        Recipe.paginate(params)
     },
     show(req, res) {
         Recipe.find(req.params.id, (recipe) => {

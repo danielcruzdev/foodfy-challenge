@@ -51,9 +51,11 @@ module.exports = {
         })
     },
     findBy(filter, callback) {
-        db.query(`SELECT *
+        db.query(`SELECT chefs.*, COUNT(recipes) AS total_recipes
       FROM chefs 
-      WHERE chefs.title ILIKE '%${filter}%'
+      LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+      WHERE chefs.name ILIKE '%${filter}%'
+      GROUP BY chefs.id
       `, (err, results) => {
             if (err) throw `Database Error! ${err}`
 

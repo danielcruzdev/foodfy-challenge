@@ -2,7 +2,7 @@
 *ESTILOS
 */
 
-@import url('https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Manrope:400,700&display=swap");
 
 * {
   margin: 0px;
@@ -13,7 +13,7 @@
 body {
   background-color: white;
   flex: 1;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   text-align: center;
   align-items: center;
 }
@@ -25,7 +25,7 @@ header {
   width: 940px;
   height: 30px;
   display: grid;
-  grid-template-columns: 91px 400px 1fr ;
+  grid-template-columns: 91px 400px 1fr;
   align-items: center;
 }
 
@@ -43,33 +43,32 @@ header .pages a:hover {
 
 header .filter form {
   display: grid;
-  grid-template-columns: 250px 100px;
-  margin-left: 70px;
+  grid-template-columns: 1fr 100px;
   gap: 5px;
   align-items: center;
   visibility: visible;
 }
 
-
 header .filter form input {
-  width: 246px;
+  width: 320px;
   height: 37px;
   font-size: 16px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   padding-left: 5px;
   box-sizing: border-box;
+  justify-self: right;
 }
 
 header .filter form button {
   width: 91px;
   height: 37px;
   border-radius: 4px;
-  background-color: #6558C3;
+  background-color: #6558c3;
   font-size: 16px;
   color: white;
   font-weight: bold;
+  justify-self: right;
 }
-
 
 /* ======BANNER====== */
 
@@ -237,7 +236,7 @@ main {
 .detail-info-container {
   width: 100%;
   height: 70px;
-  margin: 30px 0
+  margin: 30px 0;
 }
 
 .detail-info-container h2 {
@@ -317,7 +316,6 @@ main {
   margin-left: 18px;
 }
 
-
 /* CHEFS PAGE */
 
 .all-chefs-section {
@@ -364,7 +362,7 @@ main {
 }
 
 .chefs-cards .chef-name a {
-  color: #6558C3;
+  color: #6558c3;
   font-size: 14px;
   line-height: 16px;
   text-decoration: none;
@@ -382,7 +380,6 @@ main {
   color: #777777;
   margin-bottom: 1px;
 }
-
 
 /* details PAGE CHEFS */
 
@@ -465,6 +462,27 @@ main {
 .card-recipe .infos-recipe-container a {
   font-size: 14px;
   line-height: 16px;
-  color: #6558C3;
+  color: #6558c3;
   text-decoration: none;
+}
+
+/* PAGINATION */
+
+.pagination{
+  margin: 0;
+  align-self: end;
+  justify-self: center;
+  text-align: center;
+}
+
+.pagination a, 
+.pagination span {
+  color: var(--purple-rocket);
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.pagination a:hover {
+  filter: brightness(0.4);
+  border-bottom: 1px solid var(--purple-rocket);
 }
