@@ -365,7 +365,7 @@ input {
   font-size: 16px;
   padding-left: 12px;
   outline-style: double;
-  box-shadow: 2px 2px 1px rgba(90, 90, 90, 0.582);
+  box-shadow: 2px 2px -1px rgba(90, 90, 90, 0.582);
   box-sizing: border-box;
 }
 
@@ -378,7 +378,7 @@ select {
   font-size: 16px;
   padding-left: 12px;
   outline-style: double;
-  box-shadow: 2px 2px 1px rgba(90, 90, 90, 0.582);
+  box-shadow: 2px 2px -1px rgba(90, 90, 90, 0.582);
 }
 
 textarea {
@@ -389,7 +389,7 @@ textarea {
   font-size: 16px;
   padding-left: 12px;
   outline-style: double;
-  box-shadow: 2px 2px 1px rgba(90, 90, 90, 0.582);
+  box-shadow: 2px 2px -1px rgba(90, 90, 90, 0.582);
   
 }
 
@@ -592,4 +592,44 @@ button {
   line-height: 16px;
   color: #6558C3;
   text-decoration: none;
+}
+
+/* PHOTOS */
+
+.container-photos {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+.container-photos #photos-upload {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  border: 1px solid lightgray;
+  text-align: center;
+  padding: 0;
+}
+
+.container-photos #photos-upload p {
+  padding: 0;
+  border-radius: 4px;
+  color: lightgray;
+  width: 100%;
+  font-size: 38px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 69px;
+}
+
+.container-photos #photos-upload input#photos-input {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+  padding: 0;
 }

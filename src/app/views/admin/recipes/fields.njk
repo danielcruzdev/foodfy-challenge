@@ -1,7 +1,31 @@
 <div class="item">
-    <div>Imagem da receita</div>
-    <div>
-        <input type="url" name="image" placeholder="http://www.imagedareceita.com.br" value="{{ recipe.image }}"/>
+    <div>Imagens da receita</div>
+    <div class="container-photos">
+        <div id="photos-upload">
+            <input 
+                id="photos-input"
+                type="file" 
+                name="photos" 
+                multiple
+                accpet="image/*"
+                onchange="PhotosUpload.handleFileInput(event)"
+            >
+            <p>+</p>
+        </div>
+         <div id="photos-preview">
+            {% if files %}
+                {% for image in files %}
+                    <div class="photo" id="{{image.id}}">
+                        <img src="{{image.src}}" alt="{{image.name}}">
+                        <i 
+                            class="material-icons"
+                            onclick="PhotosUpload.removeOldPhoto(event)"
+                        >delete</i>
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files">
+            {% endif %}
+        </div>
     </div>
 </div>
 

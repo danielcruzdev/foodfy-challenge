@@ -4,7 +4,7 @@
 
   <div class="card-form">
     <section class="details">
-      <form method="POST" action="/admin/recipes?_method=PUT">
+      <form method="POST" action="/admin/recipes?_method=PUT" enctype="multipart/form-data">
         <h3>Editar: {{ recipe.title }}</h3>
 
         {% include 'admin/recipes/fieldsEdit.njk' %}
