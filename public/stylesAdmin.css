@@ -599,6 +599,8 @@ button {
 .container-photos {
   display: grid;
   grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 20px;
 }
 
 .container-photos #photos-upload {
@@ -632,4 +634,47 @@ button {
   opacity: 0;
   cursor: pointer;
   padding: 0;
+}
+
+/* PREVIEW */
+
+form .item #photos-preview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 8px;
+  width: 100%;
+  height: 100%;
+  margin: 8px 0;
+}
+
+form .item #photos-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+#photos-preview .photo {
+  position: relative;
+}
+
+#photos-preview .photo i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.8);
+  color: rgb(99, 97, 97);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 500%;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+#photos-preview .photo:hover i {
+  opacity: 1;
 }

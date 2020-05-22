@@ -3,28 +3,33 @@ const db = require('../../config/db')
 
 
 module.exports = {
-    all(callback) {
-      db.query(`SELECT recipes.*, chefs.name as chef_name
-      FROM recipes 
-      LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-      ORDER BY recipes.title
-      `, (err, results) => {
-        if(err) throw `Database Error! ${err}`
-  
-        callback(results.rows)
-      })
+    all() {
+      try {
+        const query = `
+          SELECT recipes.*, chefs.name as chef_name
+          FROM recipes 
+          LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+          ORDER BY recipes.title
+        `
+        return db.query(query)
+      } catch(err) {
+        console.log(`Erro ao buscar receitas --> ${err}`)
+      }
+      
     },
-    index(callback) {
-      db.query(`SELECT recipes.*, chefs.name as chef_name
-      FROM recipes 
-      LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-      ORDER BY recipes.title
-      LIMIT 6 
-      `, (err, results) => {
-        if(err) throw `Database Error! ${err}`
-  
-        callback(results.rows)
-      })
+    index() {
+      try{
+        const query = `
+          SELECT recipes.*, chefs.name as chef_name
+          FROM recipes 
+          LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+          ORDER BY recipes.title
+          LIMIT 6 
+      `
+      return db.query(query)
+    } catch (err) {
+      console.log(`Erro ao buscar receitas --> ${err}`)
+    }
     },
     create(data, callback) {
   
