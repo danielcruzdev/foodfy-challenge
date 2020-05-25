@@ -1,31 +1,35 @@
 const Chef = require('../../models/Chefs')
 
 module.exports = {
-    showAll(req, res) {
+    async showAll(req, res) {
 
         const {filter} = req.query
 
         if(filter){
-            Chef.findBy(filter, (chefs) => {
-                return res.render('main/chefs', { chefs })
-            })
+
+            let results = await Chef.findBy(filter)
+            let chefs = results.rows
+            
+            return res.render('main/chefs', { chefs })
+            
+        } else {
+
+            let results = await Chef.all()
+            let chefs = results.rows
+            
+            return res.render('main/chefs', { chefs })
         }
-        else {
-            Chef.all((chefs) => {
-                return res.render('main/chefs', { chefs })
-            })
-        }
-        
     },
-    show(req, res) {
-        Chef.find(req.params.id, (chef) => {
-            if (!chef) return res.send("Chef not found!")
+    async show(req, res) {
 
-            Chef.findRecipes(req.params.id, (recipes) => {
+        let results = await Chef.find(req.params.id)
+        let chef = results.rows[0]
 
-                return res.render("main/chef", { chef, recipes })
-            })
+        if (!chef) return res.send("Chef not found!")
 
-        })
+        results = await Chef.findRecipes(req.params.id)
+        let recipes = results.rows        
+
+        return res.render("main/chef", { chef, recipes })
     }
 }

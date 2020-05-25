@@ -2,23 +2,24 @@ const Recipe = require("../../models/Recipes");
 const { date } = require("../../../lib/utils");
 
 module.exports = {
-  index(req, res) {
+  async index(req, res) {
     const { filter } = req.query;
 
     if (filter) {
-      Recipe.findBy(filter, (recipes) => {
-        return res.render("main/recipes", { recipes });
-      });
+      let results = await Recipe.findBy(filter);
+      let recipes = results.rows;
+
+      return res.render("main/recipes", { recipes });
     } else {
-      Recipe.index((recipes) => {
-        return res.render("main/home", { recipes });
-      });
+      let results = await Recipe.index();
+      let recipes = results.rows;
+      return res.render("main/home", { recipes });
     }
   },
   about(req, res) {
     return res.render("main/about");
   },
-  showAll(req, res) {
+  async showAll(req, res) {
     let { filter, page, limit } = req.query;
 
     page = page || 1;
@@ -30,24 +31,26 @@ module.exports = {
       page,
       limit,
       offset,
-      callback(recipes) {
-        const pagination = {
-          total: Math.ceil(recipes[0].total / limit),
-          page,
-        };
-        return res.render("main/recipes", { recipes, pagination, filter });
-      },
     };
 
-    Recipe.paginate(params);
+    let results = await Recipe.paginate(params);
+    let recipes = results.rows;
+
+    const pagination = {
+      total: Math.ceil(recipes[0].total / limit),
+      page,
+    };
+
+    return res.render("main/recipes", { recipes, pagination, filter });
   },
-  show(req, res) {
-    Recipe.find(req.params.id, (recipe) => {
-      if (!recipe) return res.send("Recipe not found!");
+  async show(req, res) {
+    let result = await Recipe.find(req.params.id);
+    let recipe = result.rows[0];
 
-      recipe.created_at = date(recipe.created_at).format;
+    if (!recipe) return res.send("Recipe not found!");
 
-      return res.render("main/recipe", { recipe });
-    });
+    recipe.created_at = date(recipe.created_at).format;
+
+    return res.render("main/recipe", { recipe });
   },
 };
