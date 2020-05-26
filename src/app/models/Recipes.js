@@ -83,7 +83,7 @@ module.exports = {
         `
       );
     } catch(err) {
-      console.log(`Erro ao buscar receita --> ${err}`)
+      console.log(`Erro ao filtrar receita --> ${err}`)
     }
     
   },
