@@ -2,63 +2,103 @@ const Chef = require("../../models/Chefs");
 
 module.exports = {
   async index(req, res) {
-    let results = await Chef.all();
-    let chefs = results.rows;
-
-    return res.render("admin/chefs/chefs", { chefs });
+    try {
+      let results = await Chef.all();
+      let chefs = results.rows;
+  
+      return res.render("admin/chefs/chefs", { chefs });
+    } catch(error) {
+      console.error(`erroro ao buscar todos os chefs --> ${error}`)
+    }
+    
   },
   create(req, res) {
+    try {
     return res.render("admin/chefs/create");
+      
+    } catch (error) {
+      console.error(`Erro ao renderizar pagina create dos chefs --> ${error}`)
+    }
   },
   async post(req, res) {
-    const keys = Object.keys(req.body);
+    try {
+      const keys = Object.keys(req.body);
 
-    for (key in keys) {
-      if (req.body[key] == "") {
-        return res.send("Por favor preencha todos os campos!");
+      for (key in keys) {
+        if (req.body[key] == "") {
+          return res.send("Por favor preencha todos os campos!");
+        }
       }
+  
+      let chefId = await Chef.create();
+  
+      return res.redirect(`/admin/chefs/${chefId}`);
+
+    } catch(error) {
+      console.error(`erroro ao cadastrar chef --> ${error}`)
     }
-
-    let chefId = await Chef.create(req.body);
-
-    return res.redirect(`/admin/chefs/${chefId}`);
+    
   },
   async show(req, res) {
-    let results = await Chef.find(req.params.id);
-    let chef = results.rows[0];
-
-    if (!chef) return res.send("Chef not found!");
-
-    results = Chef.findRecipes(req.params.id);
-    let recipes = results.rows;
-
-    return res.render("admin/chefs/details", { chef, recipes });
+    try{
+      let results = await Chef.find(req.params.id);
+      let chef = results.rows[0];
+  
+      if (!chef) return res.send("Chef not found!");
+  
+      results = Chef.findRecipes(req.params.id);
+      let recipes = results.rows;
+  
+      return res.render("admin/chefs/details", { chef, recipes });
+      
+    } catch(error) {
+      console.error(`erroro ao exibir chef --> ${error}`)
+    }
+    
   },
   async edit(req, res) {
-    let results = await Chef.find(req.params.id);
-    let chef = results.rows;
+    try {
+      let results = await Chef.find(req.params.id);
+      let chef = results.rows[0];
+  
+      if (!chef) return res.send("Chef not found!");
+  
+      return res.render("admin/chefs/edit", { chef });
 
-    if (!chef) return res.send("Chef not found!");
-
-    return res.render("admin/chefs/edit", { chef });
+    } catch(error) {
+      console.error(`erroro ao exibir pagina de edição de chefe --> ${error}`)
+    }
+    
   },
   async put(req, res) {
-    const keys = Object.keys(req.body);
+    try {
+      const keys = Object.keys(req.body);
 
-    for (key in keys) {
-      if (req.body[key] == "") {
-        return res.send("Por favor preencha todos os campos!");
+      for (key in keys) {
+        if (req.body[key] == "") {
+          return res.send("Por favor preencha todos os campos!");
+        }
       }
+  
+      await Chef.update(req.body);
+  
+      return res.redirect(`/admin/chefs/${req.body.id}`);
+
+    } catch(error) {
+      console.error(`erroro ao atualizar chef --> ${error}`)
     }
-
-    await Chef.update(req.body);
-
-    return res.redirect(`/admin/chefs/${req.body.id}`);
+    
   },
   async delete(req, res) {
-      
+    try {
+            
     await Chef.delete(req.body.id);
 
     return res.redirect("/admin/chefs");
+
+    } catch (error) {
+      console.error(`Erro ao deletar chef --> ${error}`)
+    }
+
   },
 };

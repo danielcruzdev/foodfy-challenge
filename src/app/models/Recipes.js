@@ -12,7 +12,7 @@ module.exports = {
         `;
       return db.query(query);
     } catch (err) {
-      console.log(`Erro ao buscar receitas --> ${err}`);
+      console.error(`Erro ao buscar receitas --> ${err}`);
     }
   },
   index() {
@@ -26,7 +26,7 @@ module.exports = {
       `;
       return db.query(query);
     } catch (err) {
-      console.log(`Erro ao buscar receitas --> ${err}`);
+      console.error(`Erro ao buscar receitas --> ${err}`);
     }
   },
   create(data) {
@@ -54,7 +54,7 @@ module.exports = {
 
       return db.query(query, values);
     } catch(err) {
-      console.log(`Erro ao criar receitas --> ${err}`)
+      console.error(`Erro ao criar receitas --> ${err}`)
     }
   },
   find(id) {
@@ -68,7 +68,7 @@ module.exports = {
         [id],
       );
     } catch(err) {
-      console.log(`Erro ao buscar receita --> ${err}`)
+      console.error(`Erro ao buscar receita --> ${err}`)
     }
     
   },
@@ -83,7 +83,7 @@ module.exports = {
         `
       );
     } catch(err) {
-      console.log(`Erro ao filtrar receita --> ${err}`)
+      console.error(`Erro ao filtrar receita --> ${err}`)
     }
     
   },
@@ -110,7 +110,7 @@ module.exports = {
 
     return db.query(query, values);
     } catch(err) {
-      console.log(`Erro ao atualizar receita --> ${err}`)
+      console.error(`Erro ao atualizar receita --> ${err}`)
     }
     
   },
@@ -121,7 +121,7 @@ module.exports = {
         WHERE id = $1`,
         [id],)
     } catch(err) {
-      console.log(`Erro ao deletar receita --> ${err}`)
+      console.error(`Erro ao deletar receita --> ${err}`)
 
     }
     
@@ -130,7 +130,7 @@ module.exports = {
     try {
       return db.query(`SELECT name, id FROM chefs`);
     } catch(err) {
-      console.log(`Erro ao buscar chefs --> ${err}`)
+      console.error(`Erro ao buscar chefs --> ${err}`)
       
     }
   }, 
@@ -165,15 +165,19 @@ module.exports = {
   
       return db.query(query, [limit, offset]);
     } catch(err) {
-      console.log(`Erro na paginação --> ${err}`)
+      console.error(`Erro na paginação --> ${err}`)
     }
     
   },
   files(id){
-    return db.query(`
-      SELECT * 
-      FROM files 
-      WHERE recipe_id = $1
+    try {
+      return db.query(`
+      SELECT * FROM files 
+      LEFT JOIN recipe_files on recipe_files.file_id = files.id
+      WHERE recipe_files.recipe_id = $1
     `, [id])
+    } catch(err) {
+      console.error(`Erro ao buscar fotos de receitas --> ${err}`)
+    }
   }
 };

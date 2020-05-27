@@ -11,25 +11,33 @@ module.exports = {
         ORDER BY name
       `);
     } catch (err) {
-      console.log(`Erro ao buscar chefs --> ${err}`);
+      console.error(`Erro ao buscar chefs --> ${err}`);
     }
-  },
-  create(data) {
+  }, 
+  create({ filename, path, name, created_at }) {
     try {
       const query = `
+        WITH new_chef AS (
+          INSERT INTO files (id, name, path) VALUES (default, $1, $2)
+          RETURNING id )
+
         INSERT INTO chefs (
           name,
-          avatar_url,
-          created_at
-        ) VALUES ($1, $2, $3)
-        RETURNING id
+          created_at,
+          file_id
+          ) VALUES 
+          ($3, $4, (SELECT id FROM new_chef))
+          RETURNING id
       `;
 
-      const values = [data.name, data.avatar_url, date(Date.now()).iso];
+      created_at = date(Date.now()).iso
+
+      const values = [filename, path, name, created_at ];
 
       return db.query(query, values);
+
     } catch (err) {
-      console.log(`Erro ao criar chefs --> ${err}`);
+      console.error(`Erro ao criar chefs --> ${err}`);
     }
   },
   find(id) {
@@ -41,7 +49,7 @@ module.exports = {
       WHERE chefs.id = $1
       GROUP BY chefs.id`, [id]);
     } catch (err) {
-      console.log(`Erro ao buscar chef --> ${err}`);
+      console.error(`Erro ao buscar chef --> ${err}`);
     }
   },
   findBy(filter) {
@@ -54,7 +62,7 @@ module.exports = {
       GROUP BY chefs.id
       `);
     } catch (err) {
-      console.log(`Erro ao filtrar chef --> ${err}`);
+      console.error(`Erro ao filtrar chef --> ${err}`);
     }
     
   },
@@ -71,7 +79,7 @@ module.exports = {
 
       return db.query(query, values);
     } catch (error) {
-      console.log(`Erro ao atualizar chef --> ${err}`);
+      console.error(`Erro ao atualizar chef --> ${err}`);
     }
    
   },
@@ -83,7 +91,7 @@ module.exports = {
         WHERE chefs.id = $1
         `, [id]);
     } catch (error) {
-      console.log(`Erro ao buscar receitas --> ${err}`);   
+      console.error(`Erro ao buscar receitas --> ${err}`);   
     }
     
   },
@@ -92,10 +100,21 @@ module.exports = {
       return db.query(`
       DELETE FROM chefs
       WHERE id = $1`,
-    [id]);
+      [id]);
     } catch (err) {
-      console.log(`Erro ao deletar chef --> ${err}`);   
+      console.error(`Erro ao deletar chef --> ${err}`);   
     }
     
   },
+  files(id){
+    try {
+      return db.query(`
+      SELECT * FROM files 
+      LEFT JOIN chefs ON chefs.file_id = files.id
+      WHERE chefs.file_id = $1
+    `, [id])
+    } catch(err) {
+      console.error(`Erro ao buscar foto do chef --> ${err}`)
+    }
+  }
 };
