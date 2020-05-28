@@ -4,7 +4,8 @@ const { date } = require("../../lib/utils");
 module.exports = {
   all() {
     try {
-      return db.query(`SELECT chefs.*, COUNT(recipes) AS total_recipes
+      return db.query(`
+        SELECT chefs.*, COUNT(recipes.id) AS total_recipes
         FROM chefs
         LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
         GROUP BY chefs.id
@@ -14,27 +15,22 @@ module.exports = {
       console.error(`Erro ao buscar chefs --> ${err}`);
     }
   }, 
-  create({ filename, path, name, created_at }) {
+  create(data) {
     try {
       const query = `
-        WITH new_chef AS (
-          INSERT INTO files (id, name, path) VALUES (default, $1, $2)
-          RETURNING id )
+      INSERT INTO chefs (
+          file_id,
+          name
+      ) VALUES ($1, $2)
+      RETURNING id
+    `
 
-        INSERT INTO chefs (
-          name,
-          created_at,
-          file_id
-          ) VALUES 
-          ($3, $4, (SELECT id FROM new_chef))
-          RETURNING id
-      `;
+    const values = [
+      data.file_id,
+      data.name
+    ]
 
-      created_at = date(Date.now()).iso
-
-      const values = [filename, path, name, created_at ];
-
-      return db.query(query, values);
+    return db.query(query, values)
 
     } catch (err) {
       console.error(`Erro ao criar chefs --> ${err}`);
@@ -71,14 +67,17 @@ module.exports = {
       const query = `
         UPDATE chefs SET 
         name=($1),
-        avatar_url=($2)
-        WHERE id = $3
+        WHERE id = $2
       `;
 
-      const values = [data.name, data.avatar_url, data.id];
+      const values = [
+        data.name, 
+        data.id
+      ];
 
       return db.query(query, values);
     } catch (error) {
+
       console.error(`Erro ao atualizar chef --> ${err}`);
     }
    
@@ -106,15 +105,39 @@ module.exports = {
     }
     
   },
-  files(id){
-    try {
-      return db.query(`
-      SELECT * FROM files 
-      LEFT JOIN chefs ON chefs.file_id = files.id
-      WHERE chefs.file_id = $1
-    `, [id])
-    } catch(err) {
-      console.error(`Erro ao buscar foto do chef --> ${err}`)
-    }
+  paginate(params) {
+      let { filter, limit, offset } = params
+
+      let totalQuery = `(
+          SELECT count(*) FROM chefs
+      ) AS total`
+
+      let endQuery = `
+          LIMIT ${limit} OFFSET ${offset}
+      `
+
+      if (filter) {
+          const filterQuery = `
+              WHERE name ILIKE '%${filter}%'
+          `
+
+          totalQuery = `(
+              SELECT count(*) FROM chefs
+              ${filterQuery}
+          ) AS total`
+
+          endQuery = `
+              ${filterQuery}
+              ${endQuery}
+          `
+      }
+
+      const query = `
+          SELECT chefs.*, ${totalQuery}
+          FROM chefs
+          ${endQuery}
+      `
+
+      return db.query(query)
   }
 };
