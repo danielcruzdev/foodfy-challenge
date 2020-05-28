@@ -100,5 +100,24 @@ module.exports = {
       console.error(`Erro ao deletar chef --> ${error}`)
     }
 
-  },
+  }, 
+  async showAll(req, res) {
+    try {
+      const { filter } = req.query;
+
+      if (filter) {
+        let results = await Chef.findBy(filter);
+        let chefs = results.rows;
+
+        return res.render("main/chefs", { chefs });
+      } else {
+        let results = await Chef.all();
+        let chefs = results.rows;
+
+        return res.render("main/chefs", { chefs });
+      }
+    } catch (error) {
+      console.error(`Erro ao exibir chef --> ${error}`);
+    }
+  }
 };
