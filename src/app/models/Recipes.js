@@ -120,13 +120,6 @@ module.exports = {
       throw new Error(error);
     }
   },
-  chefSelectOptions() {
-    try {
-      return db.query(`SELECT name, id FROM chefs`);
-    } catch (error) {
-      console.error(`Erro ao buscar chefs --> ${err}`);
-    }
-  },
   paginate(params) {
     try {
       let { filter, limit, offset } = params;
@@ -175,7 +168,7 @@ module.exports = {
           FROM recipes
           LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
           WHERE recipes.chef_id = $1
-          ORDER BY recipes.created_at DESC`, [chefId])
+          ORDER BY recipes.title ASC`, [chefId])
 
     } catch (error) {
       throw new Error(error)

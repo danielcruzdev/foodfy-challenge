@@ -1,26 +1,62 @@
-const Recipe = require("../../models/Recipes");
-const File = require("../../models/File");
-const { date } = require("../../../lib/utils");
+const Recipe = require('../models/Recipe')
+const Chef = require('../models/Chef')
+const File = require('../models/File')
+const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
   async index(req, res) {
     try {
-      let results = await Recipe.all();
-      let recipes = results.rows;
+       
+      let { page, limit } = req.query 
 
-      return res.render("admin/index", { recipes });
+      page = page || 1
+      limit = limit || 12
+
+      let offset = limit * (page - 1)
+
+      const params = {
+        limit,
+        offset
+      }
+
+      let recipes = (await Recipe.paginate(params)).rows
+      const recipesTemp = []
+
+      for(const recipe of recipes) {
+        let files = (await Recipe.files(recipe.id)).rows
+
+        files = files.map(file => ({
+          ...file,
+          src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+        }))
+
+        recipesTemp.push({
+          ...recipe,
+          images: files
+        })
+      }
+
+      recipes = recipesTemp
+
+      const pagination = {
+        totalPages : recipes.length > 0 ? Math.ceil(recipes[0].total / limit) : 0,
+        page
+      }
+
+      return res.render(`admin/recipes/index`, { recipes, pagination })
+
     } catch (error) {
-      console.error(`Erro ao listar receitas para a pagina index --> ${error}`);
+      throw new Error(error)
     }
   },
   async create(req, res) {
     try {
-      let results = await Recipe.chefSelectOptions();
-      let chefOptions = results.rows;
+      const chefOptions = (await Chef.all()).rows;
 
       return res.render("admin/recipes/create", { chefOptions });
+
     } catch (error) {
-      console.error(`Erro ao renderizar pagina de criar receitas --> ${error}`);
+      throw new Error(error)
     }
   },
   async post(req, res) {
@@ -33,81 +69,83 @@ module.exports = {
         }
       }
 
-      if (req.files.length == 0) {
+      if (req.files.length === 0) {
         return res.send("Por favor envie pelo menos uma imagem!");
       }
 
-      let results = await Recipe.create(req.body);
-      const recipeId = results.rows[0].id;
+      const filesPromise = req.files.map(file => File.create(file))
+      const fileIds = await Promise.all(filesPromise)
 
-      const filePromise = req.files.map((file) =>
-        File.create({
-          ...file,
-          recipe_id: recipeId,
-        })
-      );
-      await Promise.all(filePromise);
+      const recipeId = (await Recipe.create(req.body)).rows[0].id
+
+      const recipeFilesPromise = fileIds.map(fileId => RecipeFiles.create({
+        recipe_id: recipeId,
+        file_id: fileId.rows[0].id
+      }))
+
+      await Promise.all(recipeFilesPromise)
 
       return res.redirect(`/admin/recipes/${recipeId}`);
     } catch (error) {
-      console.error(`Erro ao cadastrar receita --> ${error}`);
+      throw new Error(error)
     }
   },
   async show(req, res) {
     try {
-      let results = await Recipe.find(req.params.id);
-      const recipe = results.rows[0];
+
+      const { id } = req.params 
+
+      let recipe = (await Recipe.find(id)).rows[0];
 
       if (!recipe) {
-        return res.send("Produto não encontrado!");
+        return res.send("Receita não encontrada!");
       }
 
-      recipe.created_at = date(recipe.created_at).format;
+      let files = (await Recipe.files(recipe.id)).rows
 
-      results = await Recipe.files(recipe.id);
-      let files = results.rows;
-
-      files = files.map((file) => ({
+      files = files.map(file => ({
         ...file,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace(
-          "public",
-          ""
-        )}`,
+        src: `${req.protocol}://${req.headers.host}${file.path.replace( "public", "" )}`,
       }));
 
-      return res.render("admin/recipes/details", { recipe, files });
+      recipe = {
+        ...recipe,
+        images: files
+      }
+
+      return res.render("admin/recipes/show", { recipe });
     } catch (error) {
-      console.error(`Erro ao mostrar receita --> ${error}`);
+      throw new Error(error)
     }
   },
   async edit(req, res) {
     try {
-      let results = await Recipe.find(req.params.id);
-      const recipe = results.rows[0];
+
+      const { id } = req.params
+
+      let recipe = (await Recipe.find(id)).rows[0]
 
       if (!recipe) {
-        return res.send("Produto não encontrado!");
+        return res.send("Receita não encontrada!");
       }
 
-      recipe.created_at = date(recipe.created_at).format;
+      let files = (await Recipe.files(recipe.id)).rows;
 
-      results = await Recipe.chefSelectOptions();
-      let chefOptions = results.rows;
-
-      results = await Recipe.files(recipe.id);
-      let files = results.rows;
-
-      files = files.map((file) => ({
+      files = files.map(file => ({
         ...file,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace(
-          "public",
-          ""
-        )}`,
+        src: `${req.protocol}://${req.headers.host}${file.path.replace( "public", "" )}`,
       }));
 
-      return res.render("admin/recipes/edit", { recipe, files, chefOptions });
+      recipe = {
+        ...recipe,
+        images: files
+      }
+
+      const chefOptions = (await Chef.all()).rows
+
+      return res.render("admin/recipes/edit", { recipe, chefOptions });
     } catch (error) {
-      console.error(`Erro ao exibir pagina de edição da receita --> ${error}`);
+      throw new Error(error)
     }
   },
   async put(req, res) {
@@ -120,38 +158,55 @@ module.exports = {
         }
       }
 
-      if (req.files.length != 0) {
-        const newFilesPromise = req.files.map((file) => {
-          File.create({ ...file, recipe_id: req.body.id });
-        });
+      if(req.body.removed_files) {
+        const dataBaseFiles = (await Recipe.files(req.body.id)).rows.length
+        const pageFiles = req.body.removed_files.length
 
-        await Promise.all(newFilesPromise);
+        if(req.files.length === 0 && dataBaseFiles <= pageFiles) {
+          return res.send("Por favor envie pelo menos uma foto!")
+        }
+
+        let removedFilesPromise = req.body.removed_files.map(id => RecipeFiles.delete(id))
+        await Promise.all(removedFilesPromise)
+
+        removedFilesPromise = req.body.removed_files.map(id => File.delete(id))
+        await Promise.all(removedFilesPromise)
       }
 
-      if (req.body.removed_files) {
-        const removedFiles = request.body.removed_files.split(",");
-        const lastIndex = removedFiles.length - 1;
-        removedFiles.splice(lastIndex, 1);
+      await Recipe.update(req.body)
 
-        const removedFilesPromise = removedFiles.map((id) => File.delete(id));
+      const filesPromise = req.files.map(file => File.create(file))
+      const fileIds = await Promise.all(filesPromise)
 
-        await Promise.all(removedFilesPromise);
-      }
+      const recipeFilesPromise = fileIds.map(fileId => RecipeFiles.create({
+        recipe_id: req.body.id,
+        file_id: fileId.rows[0].id
+      }))
 
-      await Recipe.update(req.body);
+      await Promise.all(recipeFilesPromise)
 
       return res.redirect(`admin/recipe/${req.body.id}`);
     } catch (error) {
-      console.error(`Erro ao atualizar da receita --> ${error}`);
+      throw new Error(error)
     }
   },
   async delete(req, res) {
     try {
-      await Recipe.delete(req.body.id);
+      const { id } = req.body
+
+      let files = (await Recipe.files(id)).rows
+
+      let removeFilesPromise = files.map(file => RecipeFiles.delete(file.id))
+      await Promise.all(removeFilesPromise)
+
+      removeFilesPromise = files.map(file => File.delete(file.id))
+      await Promise.all(removeFilesPromise)
+
+      await Recipe.delete(id);
 
       return res.redirect("/admin/recipes");
     } catch (error) {
-      console.error(`Erro ao deletar receitas --> ${error}`);
+      throw new Error(error)
     }
   },
 };

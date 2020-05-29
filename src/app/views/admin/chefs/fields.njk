@@ -2,7 +2,6 @@
     <div>Nome do chef</div>
     <div>
         <input type="text" name="name" placeholder="Primeiro e último nome" value="{{ chef.name }}"/>
-        <input type="hidden" id="checkRecipes" name="total_recipes" value="{{ chef.total_recipes }}">
     </div>
 </div>
 
@@ -13,7 +12,7 @@
             <input 
                 id="photos-input"
                 type="file" 
-                name="photos" 
+                name="photo" 
                 accpet="image/*"
                 onchange="PhotosUploadChef.handleFileInput(event)"
             >
@@ -21,8 +20,8 @@
         </div>
          <div id="photos-preview">
             {% if files %}
-                    <div class="photo" id="{{image.id}}">
-                        <img src="{{image.src}}" alt="{{image.name}}">
+                    <div class="photo" id="{{file.id}}">
+                        <img src="{{file.src}}" alt="{{file.name}}">
                         <i 
                             class="material-icons"
                             onclick="PhotosUploadChef.removeOldPhoto(event)"
