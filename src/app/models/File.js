@@ -37,15 +37,15 @@ module.exports = {
       const file = (
         await db.query(`SELECT * FROM files WHERE id = $1`, [data.id])
       ).rows[0];
-      console.log(file);
+
       fs.unlinkSync(file.path);
 
       const query = `
-                UPDATE files SET
-                    name=($1),
-                    path=($2)
-                WHERE id = $3
-            `;
+        UPDATE files SET
+          name=($1),
+          path=($2)
+        WHERE id = $3
+      `;
 
       const values = [data.filename, data.path, data.id];
 
@@ -61,12 +61,10 @@ module.exports = {
 
       fs.unlinkSync(file.path);
 
-      return db.query(
-        `
-              DELETE FROM files
-              WHERE id = $1
-          `,
-        [id]
+      return db.query(`
+        DELETE FROM files
+        WHERE id = $1
+      `, [id]
       );
     } catch (err) {
       throw new Error(err);

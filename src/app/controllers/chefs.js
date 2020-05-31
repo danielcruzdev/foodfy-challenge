@@ -44,7 +44,7 @@ module.exports = {
         }
       }
 
-      if (!red.file) {
+      if (!req.file) {
         return res.send("Por favor envie pelo menos uma foto!");
       }
 

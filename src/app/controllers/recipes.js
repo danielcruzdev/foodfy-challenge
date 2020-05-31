@@ -1,5 +1,5 @@
-const Recipe = require('../models/Recipe')
-const Chef = require('../models/Chef')
+const Recipe = require('../models/Recipes')
+const Chef = require('../models/Chefs')
 const File = require('../models/File')
 const RecipeFiles = require('../models/RecipeFiles')
 
@@ -63,13 +63,13 @@ module.exports = {
     try {
       const keys = Object.keys(req.body);
 
-      for (key in keys) {
+      for (key of keys) {
         if (req.body[key] == "") {
           return res.send("Por favor preencha todos os campos!");
         }
       }
 
-      if (req.files.length === 0) {
+      if (req.files.length == 0) {
         return res.send("Por favor envie pelo menos uma imagem!");
       }
 

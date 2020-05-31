@@ -1,5 +1,5 @@
-const Recipe = require('../models/Recipe')
-const Chef = require('../models/Chef')
+const Recipe = require('../models/Recipes')
+const Chef = require('../models/Chefs')
 const File = require('../models/File')
 
 module.exports = {
@@ -152,5 +152,8 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+    about (req, res) {
+        return res.render('main/about')
     }
 }

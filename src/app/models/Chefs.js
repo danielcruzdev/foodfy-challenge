@@ -10,8 +10,8 @@ module.exports = {
         GROUP BY chefs.id
         ORDER BY name
       `);
-    } catch (err) {
-      console.error(`Erro ao buscar chefs --> ${err}`);
+    } catch (error) {
+      throw new Error(error)
     }
   }, 
   create(data) {
@@ -31,8 +31,8 @@ module.exports = {
 
     return db.query(query, values)
 
-    } catch (err) {
-      console.error(`Erro ao criar chefs --> ${err}`);
+    } catch (error) {
+      throw new Error(error)
     }
   },
   find(id) {
@@ -43,8 +43,8 @@ module.exports = {
       LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
       WHERE chefs.id = $1
       GROUP BY chefs.id`, [id]);
-    } catch (err) {
-      console.error(`Erro ao buscar chef --> ${err}`);
+    } catch (error) {
+      throw new Error(error)
     }
   },
   findBy(filter) {
@@ -56,8 +56,8 @@ module.exports = {
       WHERE chefs.name ILIKE '%${filter}%'
       GROUP BY chefs.id
       `);
-    } catch (err) {
-      console.error(`Erro ao filtrar chef --> ${err}`);
+    } catch (error) {
+      throw new Error(error)
     }
     
   },
@@ -76,8 +76,7 @@ module.exports = {
 
       return db.query(query, values);
     } catch (error) {
-
-      console.error(`Erro ao atualizar chef --> ${err}`);
+      throw new Error(error)
     }
    
   },
@@ -89,7 +88,7 @@ module.exports = {
         WHERE chefs.id = $1
         `, [id]);
     } catch (error) {
-      console.error(`Erro ao buscar receitas --> ${err}`);   
+      throw new Error(error)
     }
     
   },
@@ -99,12 +98,13 @@ module.exports = {
       DELETE FROM chefs
       WHERE id = $1`,
       [id]);
-    } catch (err) {
-      console.error(`Erro ao deletar chef --> ${err}`);   
+    } catch (error) {
+      throw new Error(error)
     }
     
   },
   paginate(params) {
+    try {
       let { filter, limit, offset } = params
 
       let totalQuery = `(
@@ -138,5 +138,9 @@ module.exports = {
       `
 
       return db.query(query)
+    } catch (error) {
+      throw new Error(error)
+    }
+      
   }
 };

@@ -7,11 +7,11 @@ const main = require('./app/controllers/main')
 
 
 //Main Routes
-routes.get("/", main.index);
+routes.get("/", main.home);
 routes.get("/sobre", main.about);
-routes.get("/receitas", main.showAll);
-routes.get("/receitas/:id", main.show);
-routes.get("/chefs", main.showAll);
+routes.get("/receitas", main.allRecipes);
+routes.get("/receitas/:id", main.showRecipe);
+routes.get("/chefs", main.allChefs);
 
 
 //Admin Routes
