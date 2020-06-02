@@ -7,7 +7,7 @@
       <form method="POST" action="/admin/recipes?_method=PUT" enctype="multipart/form-data">
         <h3>Editar: {{ recipe.title }}</h3>
 
-        {% include 'admin/recipes/fieldsEdit.njk' %}
+        {% include 'admin/recipes/fields.njk' %}
 
         <input type="hidden" name="id" value="{{ recipe.id }}"/>
         <button id="button-save" type="submit">Salvar</button>

@@ -147,7 +147,7 @@ module.exports = {
 
             recipes = recipesTemp
 
-            return res.render('main') /// ARRUMAR pagina de pesquisa! 
+            return res.render('main/search-recipes', { recipes, filter }) /// ARRUMAR pagina de pesquisa! 
 
         } catch (error) {
             

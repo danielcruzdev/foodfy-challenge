@@ -51,8 +51,15 @@
 
 <div class="item" id='ingredients'>
     <div>Ingredientes</div>
+    {% if recipe.ingredients%}
+        {% for ingredient in recipe.ingredients %}
+        <div class="ingredient">
+            <input type="text" name="ingredients[]" value="{{ ingredient }}"/>
+        </div>
+        {% endfor %}
+    {% endif %}
     <div class="ingredient">
-        <input type="text" name="ingredients[]"/>
+            <input type="text" name="ingredients[]" value="{{ ingredient }}"/>
     </div>
 </div>
 <div class="button-create">
@@ -61,8 +68,15 @@
 
 <div class="item" id='preparation'>
     <div>Modo de preparo</div>
+    {% if recipe.preparation%}
+        {% for step in recipe.preparation %}
+        <div class="preparation">
+            <input type="text" name="preparation[]" value="{{ step }}"/>
+        </div>
+        {% endfor %}
+    {% endif %}
     <div class="preparation">
-        <input type="text" name="preparation[]"/>
+            <input type="text" name="preparation[]" value="{{ step }}"/>
     </div>
 </div>
 <div class="button-create">
@@ -75,3 +89,4 @@
         <textarea type="text" name="information">{{ recipe.information }}</textarea>
     </div>
 </div>
+

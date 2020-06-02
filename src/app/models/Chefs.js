@@ -8,7 +8,7 @@ module.exports = {
         FROM chefs
         LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
         GROUP BY chefs.id
-        ORDER BY name
+        ORDER BY chefs.name
       `);
     } catch (error) {
       throw new Error(error)
@@ -18,15 +18,15 @@ module.exports = {
     try {
       const query = `
       INSERT INTO chefs (
-          file_id,
-          name
+          name,
+          file_id
       ) VALUES ($1, $2)
       RETURNING id
     `
 
     const values = [
-      data.file_id,
-      data.name
+      data.name,
+      data.file_id
     ]
 
     return db.query(query, values)

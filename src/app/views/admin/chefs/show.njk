@@ -12,7 +12,7 @@
         </div>
         <div class="chef-details-container">
             <div class="chef-avatar">
-                <img src="{{chef.avatar_url}} " style= alt="{{chef.name}}">
+                <img src="{{chef.photo}}" alt="{{chef.name}}">
             </div>
             <div class="chef-details-profile">
                 <h3>{{chef.name}}</h3>
@@ -29,7 +29,7 @@
             {% for recipe in recipes %}
             <div class="card-recipe">
                 <div class="image-recipe-container">
-                    <img src="{{ recipe.image }}" alt="{{recipe.title}}"/>
+                    <img src="{{ image.src }}" alt="{{recipe.title}}"/>
                 </div>
                 <div class="infos-recipe-container">
                     <h2>{{ recipe.title }}</h2>

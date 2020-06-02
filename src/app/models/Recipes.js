@@ -36,7 +36,7 @@ module.exports = {
           title,
           ingredients,
           preparation,
-          information,
+          information
         ) VALUES ($1, $2, $3, $4, $5)
         RETURNING id
       `;
@@ -46,7 +46,7 @@ module.exports = {
         data.title,
         data.ingredients,
         data.preparation,
-        data.information,
+        data.information
       ];
 
       return db.query(query, values);

@@ -86,6 +86,7 @@ module.exports = {
       await Promise.all(recipeFilesPromise)
 
       return res.redirect(`/admin/recipes/${recipeId}`);
+      
     } catch (error) {
       throw new Error(error)
     }

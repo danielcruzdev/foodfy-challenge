@@ -13,7 +13,7 @@
         {% for recipe in recipes %}
         <div class="card">
             <div class="image-container">
-                <img src="{{ recipe.image }}" alt="{{recipe.title}}"/>
+                <img src="{{ recipe.images[0].src }}" alt="{{recipe.title}}"/>
             </div>
             <div class="infos">
                 <h2>{{ recipe.title }}</h2>
@@ -24,5 +24,12 @@
         {% endfor %}
     </section>
 </section>
+
+
+<div class="pagination" 
+    data-page={{pagination.page}} 
+    data-total={{pagination.total}} 
+    data-filter={{filter}}>
+</div>
 
 {% endblock %}

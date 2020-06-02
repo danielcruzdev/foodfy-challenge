@@ -49,8 +49,13 @@ module.exports = {
       }
 
       const fileID = (await File.create(req.file)).rows[0].id;
-      const chefID = (await Chef.create({ ...req.body, file_id: fileID }))
-        .rows[0].id;
+
+      const chefData = {
+        ...req.body,
+        file_id: fileID
+      }
+      
+      const chefID = (await Chef.create(chefData)).rows[0].id;
 
       return res.redirect(`/admin/chefs/${chefID}`);
     } catch (error) {
@@ -69,14 +74,15 @@ module.exports = {
       const recipesTemp = [];
 
       for (const recipe of recipes) {
-        let files = (await Recipe.files(recipe.id)).rows;
+        let RecipeID = recipe.id
+        let files = (await Recipe.files(RecipeID)).rows;
 
         files = files.map((file) => ({
           ...file,
           src: `${req.protocol}://${req.headers.host}${file.path.replace(
             "public",
             ""
-          )}`,
+          )}`
         }));
 
         recipesTemp.push({
@@ -94,7 +100,7 @@ module.exports = {
         photo: `${req.protocol}://${req.headers.host}${file.path.replace(
           "public",
           ""
-        )}`,
+        )}`
       };
 
       return res.render("admin/chefs/show", { chef, recipes });
@@ -112,14 +118,14 @@ module.exports = {
 
       let file = (await File.find(chef.file_id)).rows[0];
 
-      file = {
+      const photo = {
         ...file,
         src: `${req.protocol}://${req.headers.host}${file.path.replace(
           "public",
           ""
         )}`,
       };
-      return res.render("admin/chefs/edit", { chef, file });
+      return res.render("admin/chefs/edit", { chef, photo });
     } catch (error) {
       throw new Error(error);
     }
@@ -140,10 +146,20 @@ module.exports = {
         if (!chef) return res.send("Chef não encontrado!");
 
         const fileID = chef.file_id;
-        await File.update({ ...req.file, id: fileID });
+
+        const fileData = {
+          ...req.files,
+          id: fileID
+        }
+        
+        await File.update(fileData);
+      }
+      
+      const chefData = {
+        ...req.body
       }
 
-      await Chef.update(req.body);
+      await Chef.update(chefData);
 
       return res.redirect(`/admin/chefs/${req.body.id}`);
     } catch (error) {
