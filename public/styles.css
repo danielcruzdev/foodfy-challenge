@@ -220,19 +220,35 @@ main {
   width: 940px;
   height: 100%;
   margin: 0 auto;
+  display: grid;
+  grid-template-rows: 1fr 130px ;
+  gap: 20px;
 }
 
-.detail-image-container {
-  width: 940px;
-  height: 280px;
+.detail-header .gallery {
+  display: grid;
+  grid-template-rows: 1fr 60px;
 }
 
-.detail-image-container img {
+.detail-header .gallery .highlight img {
   width: 940px;
   height: 280px;
-  border-radius: 15px;
+  object-fit: cover;
+  object-position: 30% 50%;
+}
+
+.gallery .gallery-preview { 
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px 50px;
+  gap: 20px;
+}
+
+.gallery .gallery-preview img  {
+  width: 50px;
+  height: 50px;
   object-fit: cover;
 }
+
 
 .detail-info-container {
   width: 100%;
