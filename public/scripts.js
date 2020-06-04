@@ -192,6 +192,12 @@ const PhotosUpload = {
       return true
     }
 
+    if(fileList.length == 0){
+      alert('Envie pelo menos uma foto!')
+      vent.preventDefault()
+      return true
+    }
+
     const photosDiv = []
 
     preview.childNodes.forEach(item => {

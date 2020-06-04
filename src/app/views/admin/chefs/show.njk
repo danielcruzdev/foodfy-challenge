@@ -29,7 +29,7 @@
             {% for recipe in recipes %}
             <div class="card-recipe">
                 <div class="image-recipe-container">
-                    <img src="{{ image.src }}" alt="{{recipe.title}}"/>
+                    <img src="{{ recipe.images[0].src }}" alt="{{recipe.title}}"/>
                 </div>
                 <div class="infos-recipe-container">
                     <h2>{{ recipe.title }}</h2>
@@ -41,7 +41,4 @@
         </section>
     </div>
 </main>
-
-<script src="/scripts.js"></script>
-
 {% endblock %}

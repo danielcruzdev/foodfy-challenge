@@ -6,12 +6,12 @@
             <div class="highlight">
                 <img src="{{ recipe.images[0].src }}" alt="{{ recipe.images[0].name }}" onclick="Lightbox.open()" />
 
-                <!-- <div class="lightbox-target">
+                <div class="lightbox-target">
                     <img src="{{ recipe.images[0].src }}" alt="{{ recipe.images[0].name }}" />
                     <a href="#" class="lightbox-close" onclick="Lightbox.close()">
                         <i class="material-icons">close</i>
                     </a>
-                </div> -->
+                </div>
             </div>
             <div class="gallery-preview">
                 {% for image in recipe.images %} 
@@ -64,7 +64,4 @@
         </div>
     </div>
 </main>
-
-<script src="/scripts.js"></script>
-
 {% endblock %}
