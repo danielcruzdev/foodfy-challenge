@@ -14,20 +14,19 @@
                 type="file" 
                 name="photo" 
                 accpet="image/*"
-                onchange="PhotosUploadChef.handleFileInput(event)"
+                onchange="PhotosUpload.handleFileInput(event)"
             >
             <p>+</p>
         </div>
-         <div id="photos-preview">
+        <div id="photos-preview">
             {% if photo %}
                     <div class="photo" id="{{photo.id}}">
                         <img src="{{photo.src}}" alt="{{photo.name}}">
                         <i 
                             class="material-icons"
-                            onclick="PhotosUploadChef.removeOldPhoto(event)"
+                            onclick="PhotosUpload.removeOldPhoto(event)"
                         >delete</i>
                     </div>
-                <input type="hidden" name="removed_files">
             {% endif %}
         </div>
     </div>

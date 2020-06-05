@@ -88,7 +88,7 @@ module.exports = {
 
       await Promise.all(recipeFilesPromise);
 
-      return res.redirect(`/admin/recipes/${recipeId}`);
+      return res.redirect(`/admin/recipe/${recipeId}`);
     } catch (error) {
       throw new Error(error);
     }
@@ -205,7 +205,7 @@ module.exports = {
 
       await Promise.all(recipeFilesPromise);
 
-      return res.redirect(`/admin/recipes/${req.body.id}/`);
+      return res.redirect(`/admin/recipe/${req.body.id}/`);
     } catch (error) {
       throw new Error(error);
     }

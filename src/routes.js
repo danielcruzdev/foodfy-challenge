@@ -17,9 +17,9 @@ routes.get("/chefs", main.allChefs);
 //Admin Routes
 routes.get("/admin", (req, res) => res.redirect('/admin/recipes'))
 routes.get("/admin/recipes", recipes.index);
-routes.get("/admin/recipes/create", recipes.create);
-routes.get("/admin/recipes/:id", recipes.show);
-routes.get("/admin/recipes/:id/edit", recipes.edit);
+routes.get("/admin/recipe/create", recipes.create);
+routes.get("/admin/recipe/:id", recipes.show);
+routes.get("/admin/recipe/:id/edit", recipes.edit);
 
 routes.post("/admin/recipes", multer.array('images', 5), recipes.post);
 routes.put("/admin/recipes", multer.array('images', 5), recipes.put);
