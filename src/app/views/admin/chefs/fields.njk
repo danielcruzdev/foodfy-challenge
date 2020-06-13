@@ -2,6 +2,7 @@
     <div>Nome do chef</div>
     <div>
         <input type="text" name="name" placeholder="Primeiro e último nome" value="{{ chef.name }}"/>
+        <input type="hidden" value="{{ chef.total_recipes }}" />
     </div>
 </div>
 
@@ -27,6 +28,7 @@
                             onclick="PhotosUpload.removeOldPhoto(event)"
                         >delete</i>
                     </div>
+                <input type="hidden" name="removed_files"/>
             {% endif %}
         </div>
     </div>

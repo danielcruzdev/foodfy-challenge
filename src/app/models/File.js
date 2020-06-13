@@ -32,42 +32,25 @@ module.exports = {
       throw new Error(error);
     }
   },
-  async update(data) {
-    try {
-      const file = (
-        await db.query(`SELECT * FROM files WHERE id = $1`, [data.id])
-      ).rows[0];
-
-      fs.unlinkSync(file.path);
-
-      const query = `
-        UPDATE files SET
-          name=($1),
-          path=($2)
-        WHERE id = $3
-      `;
-
-      const values = [data.filename, data.path, data.id];
-
-      return db.query(query, values);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
   async delete(id) {
     try {
-      const file = (await db.query(`SELECT * FROM files WHERE id = $1`, [id]))
-        .rows[0];
+      const { rows } = await db.query(`
+        SELECT * FROM files WHERE id = $1
+      
+      `, [id])
+
+      const file = rows[0]
 
       fs.unlinkSync(file.path);
 
       return db.query(`
         DELETE FROM files
         WHERE id = $1
-      `, [id]
-      );
-    } catch (err) {
-      throw new Error(err);
+      `, [id])
+
+    } catch (error) {
+      console.error(error);
     }
   },
 };
+ 

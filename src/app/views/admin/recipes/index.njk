@@ -6,7 +6,7 @@
     <div class="detail-text-container index">
         <h3>Gerenciar receitas</h3>
         <div class="button-edit index">
-            <a href="/admin/recipes/create">Nova receita</a>
+            <a href="/admin/recipe/create">Nova receita</a>
         </div>    
     </div>
     <section class="cards">
@@ -18,7 +18,7 @@
             <div class="infos">
                 <h2>{{ recipe.title }}</h2>
                 <p>{{ recipe.chef_name }}</p>
-                <a href="/admin/recipes/{{ recipe.id }}/">Visualizar</a>
+                <a href="/admin/recipe/{{ recipe.id }}/">Visualizar</a>
             </div>
         </div>
         {% endfor %}

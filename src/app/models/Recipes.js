@@ -177,7 +177,8 @@ module.exports = {
   files(id) {
     try {
       return db.query(`
-        SELECT * FROM files 
+        SELECT files.*, recipe_files.file_id AS file_id
+        FROM files 
         LEFT JOIN recipe_files ON (recipe_files.file_id = files.id)
         WHERE recipe_files.recipe_id = $1
       `,[id]);

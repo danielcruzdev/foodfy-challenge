@@ -159,22 +159,24 @@ module.exports = {
     try {
       const keys = Object.keys(req.body);
 
-      for (key in keys) {
+      for (const key of keys) {
         if (req.body[key] == "" && key != "removed_files") {
-          return res.send("Por favor preencha todos os campos!");
+          return res.send("Please, fill all fields");
         }
       }
 
-      if (req.body.removed_files != 0) {
-        const newFilesPromise = req.files.map((file) => {
-          File.create({ ...file });
-        });
+      if (req.files.length != 0) {
+        const filesPromise = req.files.map((file) => File.create(file));
+        const fileIds = await Promise.all(filesPromise);
 
-        await Promise.all(newFilesPromise);
-      }
+        const recipeFilesPromisse = fileIds.map((fileId) =>
+          RecipeFiles.create({
+            recipe_id: req.body.id,
+            file_id: fileId.rows[0].id,
+          })
+        );
 
-      if (req.files.length == 0) {
-        return res.send("Por favor envie pelo menos uma foto!");
+        await Promise.all(recipeFilesPromisse);
       }
 
       if (req.body.removed_files) {
@@ -182,28 +184,17 @@ module.exports = {
         const lastIndex = removedFiles.length - 1;
         removedFiles.splice(lastIndex, 1);
 
-        let removedFilesPromise = removedFiles.map((id) =>
+        const removedRecipeFilesPromise = removedFiles.map(id =>
           RecipeFiles.delete(id)
         );
-        await Promise.all(removedFilesPromise);
 
-        removedFilesPromise = removedFiles.map((id) => File.delete(id));
+        await Promise.all(removedRecipeFilesPromise);
+
+        const removedFilesPromise = removedFiles.map(id => File.delete(id));
         await Promise.all(removedFilesPromise);
       }
 
       await Recipe.update(req.body);
-
-      const filesPromise = req.files.map((file) => File.create(file));
-      const fileIds = await Promise.all(filesPromise);
-
-      const recipeFilesPromise = fileIds.map((fileId) =>
-        RecipeFiles.create({
-          recipe_id: req.body.id,
-          file_id: fileId.rows[0].id,
-        })
-      );
-
-      await Promise.all(recipeFilesPromise);
 
       return res.redirect(`/admin/recipe/${req.body.id}/`);
     } catch (error) {

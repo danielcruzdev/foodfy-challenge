@@ -142,14 +142,16 @@ module.exports = {
       }
 
       if (req.file) {
-        const chef = (await Chef.find(req.body.id)).rows[0];
+        const { id } = req.params 
+
+        const chef = (await Chef.find(id)).rows[0];
 
         if (!chef) return res.send("Chef não encontrado!");
 
         const fileID = chef.file_id;
 
         const fileData = {
-          ...req.files,
+          ...req.file,
           id: fileID
         }
         
@@ -169,15 +171,15 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      const { chefID } = req.body;
+      const { id } = req.body;
 
       // --> Buscando o chefe para excluir
-      const chef = (await Chef.find(chefID)).rows[0];
+      const chef = (await Chef.find(id)).rows[0];
 
       if (!chef) return res.send("Chef não encontrado!");
 
       // --> Deletando o chef e o arquivo do chefe buscado
-      await Chef.delete(chefID);
+      await Chef.delete(id);
       await File.delete(chef.file_id);
 
       // --> Redirecionando para a pagina com todos os chefs.

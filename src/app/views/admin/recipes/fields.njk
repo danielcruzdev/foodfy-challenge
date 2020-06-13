@@ -5,17 +5,17 @@
             <input 
                 id="photos-input"
                 type="file" 
-                name="images" 
+                name="photos" 
                 multiple
                 accpet="image/*"
-                onchange="PhotosUpload.handleFileInput(event, 5)"
+                onchange="PhotosUpload.handleFileInput(event)"
             >
             <p>+</p>
         </div>
         <div id="photos-preview">
             {% if recipe.images %}
                 {% for image in recipe.images %}
-                    <div class="photo" id="{{image.id}}">
+                    <div class="photo" id="{{image.file_id}}">
                         <img src="{{image.src}}" alt="{{image.name}}">
                         <i 
                             class="material-icons"
@@ -24,6 +24,7 @@
                         </i>
                     </div>
                 {% endfor %}
+                <input type="hidden" name="removed_files">
             {% endif %}
         </div>
     </div>

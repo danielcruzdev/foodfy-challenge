@@ -131,38 +131,28 @@ if (pagination) {
 // Galeria de fotos
 
 const PhotosUpload = {
-  input: null,
-  preview: document.querySelector(".container-photos"),
-  uploadLimit: 1,
+  input: "",
+  preview: document.querySelector("#photos-preview"),
+  uploadLimit: 6,
   files: [],
-  handleFileInput(event, limit) {
-    const { files: filesList } = event.target;
+  handleFileInput(event) {
+    const { files: fileList } = event.target;
     PhotosUpload.input = event.target;
 
-    PhotosUpload.uploadLimit = limit || 1;
+    if (PhotosUpload.hasLimit(event)) return;
 
-    if (PhotosUpload.uploadLimit === 1) {
-      PhotosUpload.files = [];
-      PhotosUpload.input.files = PhotosUpload.getAllFiles();
-      Array.from(PhotosUpload.preview.children).forEach((preview) =>
-        preview.remove()
-      );
-    }
-
-    if (PhotosUpload.hasLimit(filesList)) {
-      event.preventDefault();
-      PhotosUpload.input.files = PhotosUpload.getAllFiles();
-      return;
-    }
-
-    Array.from(filesList).forEach((file) => {
+    Array.from(fileList).forEach((file) => {
       PhotosUpload.files.push(file);
 
       const reader = new FileReader();
 
       reader.onload = () => {
-        const image = PhotosUpload.getImage(reader.result);
-        PhotosUpload.preview.appendChild(image);
+        const image = new Image();
+        image.src = String(reader.result);
+
+        const div = PhotosUpload.getContainer(image);
+
+        PhotosUpload.preview.appendChild(div);
       };
 
       reader.readAsDataURL(file);
@@ -182,30 +172,32 @@ const PhotosUpload = {
 
     return div;
   },
-  hasLimit(filesList) {
-    if(filesList.length + PhotosUpload.files.length > PhotosUpload.uploadLimit) {
-      alert(`Envie no máximo ${ PhotosUpload.uploadLimit } fotos!`)
-      return true
-  }
+  hasLimit(event) {
+    const { uploadLimit, input, preview } = PhotosUpload;
+    const { files: fileList } = input;
 
-  return false
-  },
-  getImage(src) {
-      const image = new Image()
+    if (fileList.length > uploadLimit) {
+      alert(`Envie no maximo ${uploadLimit} fotos!`);
+      event.preventDefault();
+      return true;
+    }
 
-      image.src = String(src)
+    const photosDiv = [];
 
-      const div = document.createElement('div')
-      div.classList.add('photo')
+    preview.childNodes.forEach((item) => {
+      if (item.classList && item.classList.value == "photo")
+        photosDiv.push(item);
+    });
 
-      if(PhotosUpload.uploadLimit > 1) {
-          div.onclick = PhotosUpload.removePhoto
-          div.appendChild(PhotosUpload.getRemoveButton())
-      }
+    const totalPhotos = fileList.length + photosDiv.length;
 
-      div.appendChild(image)
+    if (totalPhotos > uploadLimit) {
+      alert("Você atingiu o limite de fotos!");
+      event.preventDefault();
+      return true;
+    }
 
-      return div
+    return false;
   },
   getAllFiles() {
     const dataTransfer =
@@ -223,10 +215,9 @@ const PhotosUpload = {
     return button;
   },
   removePhoto(event) {
-    const photoDiv = event.target.parentNode; // <div class="photo"
+    const photoDiv = event.target.parentNode;
     const photosArray = Array.from(PhotosUpload.preview.children);
-    const index = photosArray.indexOf(photoDiv) - 1;
-    console.log(event.target, photoDiv, index)
+    const index = photosArray.indexOf(photoDiv);
 
     PhotosUpload.files.splice(index, 1);
     PhotosUpload.input.files = PhotosUpload.getAllFiles();
@@ -234,19 +225,18 @@ const PhotosUpload = {
     photoDiv.remove();
   },
   removeOldPhoto(event) {
-    const photoDiv = event.target.parentNode
-        
+    const photoDiv = event.target.parentNode;
+
     if(photoDiv.id) {
-        const removedFile = document.createElement('input')
-        removedFile.setAttribute('type', 'hidden')
-        removedFile.setAttribute('name', 'removed_files[]')
 
-        removedFile.value = photoDiv.id
+      const removedFiles = document.querySelector('input[name="removed_files"]');
 
-        PhotosUpload.preview.appendChild(removedFile)
+      if (removedFiles) {
+        removedFiles.value += `${photoDiv.id},`;
+      }
     }
 
-    photoDiv.remove()
+    photoDiv.remove();
   },
 };
 

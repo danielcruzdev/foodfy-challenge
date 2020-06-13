@@ -21,8 +21,8 @@ routes.get("/admin/recipe/create", recipes.create);
 routes.get("/admin/recipe/:id", recipes.show);
 routes.get("/admin/recipe/:id/edit", recipes.edit);
 
-routes.post("/admin/recipes", multer.array('images', 5), recipes.post);
-routes.put("/admin/recipes", multer.array('images', 5), recipes.put);
+routes.post("/admin/recipes", multer.array("photos", 5), recipes.post);
+routes.put("/admin/recipes", multer.array("photos", 5), recipes.put);
 routes.delete("/admin/recipes", recipes.delete);
 
 
@@ -31,8 +31,8 @@ routes.get("/admin/chefs/create", chefs.create);
 routes.get("/admin/chefs/:id", chefs.show);
 routes.get("/admin/chefs/:id/edit", chefs.edit);
 
-routes.post("/admin/chefs", multer.single('photo'), chefs.post);
-routes.put("/admin/chefs", multer.single('photo'), chefs.put);
+routes.post("/admin/chefs", multer.single("photo"), chefs.post);
+routes.put("/admin/chefs", multer.single("photo"), chefs.put);
 routes.delete("/admin/chefs", chefs.delete);
 
 module.exports = routes;
