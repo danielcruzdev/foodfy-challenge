@@ -142,13 +142,15 @@ module.exports = {
       }
 
       if (req.file) {
-        const { id } = req.params 
+        const { id } = req.body
 
         const chef = (await Chef.find(id)).rows[0];
+        console.log(chef)
 
         if (!chef) return res.send("Chef não encontrado!");
 
         const fileID = chef.file_id;
+        console.log(fileID)
 
         const fileData = {
           ...req.file,
@@ -156,11 +158,15 @@ module.exports = {
         }
         
         await File.update(fileData);
+
+        console.log(fileData)
       }
       
       const chefData = {
         ...req.body
       }
+
+      console.log(chefData)
 
       await Chef.update(chefData);
 

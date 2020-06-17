@@ -58,10 +58,11 @@
             <input type="text" name="ingredients[]" value="{{ ingredient }}"/>
         </div>
         {% endfor %}
+    {% else %}
+        <div class="ingredient">
+                <input type="text" name="ingredients[]" value="{{ ingredient }}"/>
+        </div>
     {% endif %}
-    <div class="ingredient">
-            <input type="text" name="ingredients[]" value="{{ ingredient }}"/>
-    </div>
 </div>
 <div class="button-create">
     <button type="button" class="add-ingredient">Adicionar ingrediente</button>
@@ -75,10 +76,11 @@
             <input type="text" name="preparation[]" value="{{ step }}"/>
         </div>
         {% endfor %}
-    {% endif %}
+    {% else %}
     <div class="preparation">
-            <input type="text" name="preparation[]" value="{{ step }}"/>
+        <input type="text" name="preparation[]" value="{{ step }}"/>
     </div>
+    {% endif %}
 </div>
 <div class="button-create">
     <button type="button" class="add-preparation">Adicionar preparação</button>
