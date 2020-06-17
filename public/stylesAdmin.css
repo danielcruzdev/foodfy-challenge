@@ -8,10 +8,8 @@
 
 body {
   background-color: white;
-  flex: 1;
   font-family: 'Manrope', sans-serif;
   text-align: center;
-  align-items: center;
   display: flex;
   flex-direction: column;
 }
