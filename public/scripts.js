@@ -135,11 +135,11 @@ const PhotosUpload = {
   preview: document.querySelector("#photos-preview"),
   uploadLimit: 6,
   files: [],
-  handleFileInput(event) {
+  handleFileInput(event, limit) {
     const { files: fileList } = event.target;
     PhotosUpload.input = event.target;
 
-    if (PhotosUpload.hasLimit(event)) return;
+    if (PhotosUpload.hasLimit(event, limit)) return;
 
     Array.from(fileList).forEach((file) => {
       PhotosUpload.files.push(file);
@@ -172,12 +172,12 @@ const PhotosUpload = {
 
     return div;
   },
-  hasLimit(event) {
-    const { uploadLimit, input, preview } = PhotosUpload;
+  hasLimit(event, limit) {
+    const { input, preview } = PhotosUpload;
     const { files: fileList } = input;
 
-    if (fileList.length > uploadLimit) {
-      alert(`Envie no maximo ${uploadLimit} fotos!`);
+    if (fileList.length > limit) {
+      alert(`Envie no maximo ${limit} fotos!`);
       event.preventDefault();
       return true;
     }
@@ -191,7 +191,7 @@ const PhotosUpload = {
 
     const totalPhotos = fileList.length + photosDiv.length;
 
-    if (totalPhotos > uploadLimit) {
+    if (totalPhotos > limit) {
       alert("Você atingiu o limite de fotos!");
       event.preventDefault();
       return true;
