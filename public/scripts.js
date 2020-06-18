@@ -100,8 +100,6 @@ function paginate(selectedPage, totalPages) {
   return pages;
 }
 
-const pagination = document.querySelector(".pagination");
-
 function createPagination(pagination) {
   const page = +pagination.dataset.page;
   const total = +pagination.dataset.total;
@@ -123,6 +121,8 @@ function createPagination(pagination) {
   }
   pagination.innerHTML = elements;
 }
+
+const pagination = document.querySelector(".pagination");
 
 if (pagination) {
   createPagination(pagination);

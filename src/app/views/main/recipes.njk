@@ -1,6 +1,10 @@
-{% extends "layoutMain.njk" %} {% block head %}
+{% extends "layoutMain.njk" %} 
+
+{% block head %}
 <title>Receitas - Foodfy</title>
-{% endblock head %} {% block filter %}
+{% endblock head %} 
+
+{% block filter %}
 <div class="filter">
   <form action="/receitas" method="GET">
     <input
@@ -12,7 +16,9 @@
     <button type="submit">Buscar</button>
   </form>
 </div>
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 
 <section class="most-accessed">
   <div class="recipes-cards">

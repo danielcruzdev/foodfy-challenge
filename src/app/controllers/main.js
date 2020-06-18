@@ -36,10 +36,10 @@ module.exports = {
     },
     async allRecipes(req, res) {
         try {
-            let { page } = req.query
+            let { page, filter, limit } = req.query
 
             page = page || 1
-            const limit = 12
+            limit = limit || 6
 
             let offset = limit * ( page - 1 )
 
@@ -72,7 +72,7 @@ module.exports = {
                 page
             }
             
-            return res.render('main/recipes', { recipes, pagination })
+            return res.render('main/recipes', { recipes, pagination, filter })
 
         } catch (error) {
             throw new Error(error)
