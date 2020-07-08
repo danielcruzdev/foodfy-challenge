@@ -109,7 +109,7 @@ header .header {
 footer {
   background-color: #eeeeee;
   width: 100%;
-  margin-top: auto;
+  height: 100%;
   text-align: center;
 }
 
@@ -122,14 +122,24 @@ footer p {
 
 /* ======PAGE DETAILS====== */
 
-main {
+.main-recipes {
   width: 100%;
-  height: 100%;
+  height: 1000px;
+  margin: 0 auto;
 }
 
-.detail-header {
+.detail-header {  
   width: 940px;
   height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 80px 1fr 130px ;
+  gap: 20px;
+}
+
+.detail-header-chefs {  
+  width: 940px;
+  height: 250px;
   margin: 0 auto;
   display: grid;
   grid-template-rows: 80px 1fr 130px ;

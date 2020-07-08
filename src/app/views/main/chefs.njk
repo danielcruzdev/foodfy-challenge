@@ -4,15 +4,6 @@
 <title>Chefs - Foodfy</title>
 {% endblock head %}
 
-{% block filter %}
-<div class="filter">
-    <form action="/chefs" method="GET">
-        <input type="text" name="filter" placeholder="Buscar um chefe" value={{filter}}>
-        <button type="submit">Buscar</button>
-    </form>
-</div>
-{% endblock %}
-
 {% block content %}
 <section class="all-chefs-section">
     <h1>Chefs</h1>

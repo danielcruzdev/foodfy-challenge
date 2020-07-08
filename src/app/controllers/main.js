@@ -45,7 +45,9 @@ module.exports = {
 
             const params = {
                 limit,
-                offset
+                offset,
+                page,
+                filter
             }
 
             let recipes = (await Recipe.paginate(params)).rows
@@ -68,7 +70,7 @@ module.exports = {
             recipes = recipesTemp
 
             const pagination = {
-                totalPages: recipes.length > 0 ? Math.ceil(recipes[0].total / limit) : 0,
+                total: recipes.length > 0 ? Math.ceil(recipes[0].total / limit) : 0,
                 page
             }
             
@@ -122,35 +124,6 @@ module.exports = {
             return res.render('main/chefs', { chefs })
         } catch (error) {
             throw new Error(error)
-        }
-    },
-    async search(req, res) {
-        try {
-            let { filter } = req.query
-            
-            let recipes = (await Recipe.findBy(filter)).rows
-            const recipesTemp = []
-
-            for(const recipe of recipes) {
-                let files = (await Recipe.files(recipe.id)).rows
-
-                files = files.map(file => ({
-                    ...file,
-                    src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-                }))
-
-                recipesTemp.push({
-                    ...recipe,
-                    images: files
-                })
-            }
-
-            recipes = recipesTemp
-
-            return res.render('main/search-recipes', { recipes, filter }) /// ARRUMAR pagina de pesquisa! 
-
-        } catch (error) {
-            
         }
     },
     about (req, res) {

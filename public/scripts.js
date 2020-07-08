@@ -79,13 +79,11 @@ function paginate(selectedPage, totalPages) {
     const pagesAfterSelectedPage = currentPage <= selectedPage + 2;
     const pagesBeforeSelectedPage = currentPage >= selectedPage - 2;
 
-    if (
-      firstAndLastPage ||
-      (pagesBeforeSelectedPage && pagesAfterSelectedPage)
-    ) {
-      if (oldPage && currentPage - oldPage > 2) {
-        pages.push("...");
-      }
+    if (firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+
+    if (oldPage && currentPage - oldPage > 2) {
+      pages.push("...");
+    }
 
       if (oldPage && currentPage - oldPage == 2) {
         pages.push(oldPage + 1);

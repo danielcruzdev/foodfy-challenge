@@ -12,7 +12,7 @@
 
 body {
   background-color: white;
-  flex: 1;
+  height: auto;
   font-family: "Manrope", sans-serif;
   text-align: center;
   align-items: center;
@@ -136,6 +136,8 @@ header .filter form button {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+  height: 100%;
+  width: 100%;
 }
 
 .recipe-card {
@@ -174,8 +176,7 @@ header .filter form button {
 footer {
   background-color: #eeeeee;
   width: 100%;
-  height: 100%;
-  margin-top: auto;
+  margin-bottom: auto;
 }
 
 footer p {
@@ -198,7 +199,7 @@ footer p {
 }
 
 .about h1 {
-  font-size: 24px0;
+  font-size: 24px;
   font-weight: bold;
   line-height: 28px;
   margin-bottom: 20px;
@@ -346,6 +347,7 @@ main {
 
 .all-chefs-section {
   width: 940px;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
   padding-bottom: 60px;
@@ -441,6 +443,13 @@ main {
   color: #444444;
 }
 
+.main-recipes {
+  width: 940px;
+  height: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
 .cards-recipes-chefs {
   margin-top: 50px;
   display: grid;
@@ -495,22 +504,23 @@ main {
 /* PAGINATION */
 
 .pagination{
-  margin: 0;
+  margin: 0 auto;
   align-self: end;
+  text-align: center;
   justify-self: center;
   padding-bottom: 40px;
 }
 
 .pagination a, 
 .pagination span {
-  color: var(--purple-rocket);
+  color: black;
   text-decoration: none;
   margin-right: 16px;
 }
 
 .pagination a:hover {
   filter: brightness(0.4);
-  border-bottom: 1px solid var(--purple-rocket);
+  border-bottom: 1px solid black;
 }
 
 /* LIGHTBOX */
