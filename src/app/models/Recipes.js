@@ -122,7 +122,7 @@ module.exports = {
   },
   paginate(params) {
     try {
-      let { filter, limit, offset } = params;
+      const { filter, limit, offset } = params;
 
       let totalQuery = `(
             SELECT count(*) FROM recipes
@@ -135,7 +135,8 @@ module.exports = {
 
       if (filter) {
         const filterQuery = `
-                WHERE name ILIKE '%${filter}%'
+                WHERE title ILIKE '%${filter}%'
+                OR chefs.name ILIKE '%${filter}%'
             `;
 
         totalQuery = `(

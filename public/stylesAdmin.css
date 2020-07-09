@@ -30,7 +30,7 @@ header .header {
   width: 940px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 90px 300px;
+  grid-template-columns: 90px 300px 465px;
   gap: 45px;
 }
 
@@ -728,6 +728,71 @@ form .item #photos-preview .photo img {
 #photos-preview .photo:hover i {
   opacity: 1;
 }
+
+/* FILTER */
+
+header .filter {
+  width: 465px;
+  height: 37px;
+}
+
+header .filter form {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 5px;
+  align-items: center;
+  visibility: visible;
+  width: 450px;
+  height: 37px;
+  margin: 0 auto;
+  justify-self: right;
+}
+
+header .filter form input {
+  width: 320px;
+  height: 37px;
+  font-size: 16px;
+  padding-left: 5px;
+  box-sizing: border-box;
+  justify-self: right;
+  border-radius: 4px;
+  outline: none;
+  outline-style: none;
+}
+
+header .filter form button {
+  width: 91px;
+  height: 37px;
+  border-radius: 4px;
+  background-color: #6558c3;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  justify-self: right;
+}
+
+/* PAGINATION */
+
+.pagination{
+  margin: 0 auto;
+  align-self: end;
+  text-align: center;
+  justify-self: center;
+  padding-bottom: 40px;
+}
+
+.pagination a, 
+.pagination span {
+  color: black;
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.pagination a:hover {
+  filter: brightness(0.4);
+  border-bottom: 1px solid black;
+}
+
 
 /* LIGHTBOX */
 .gallery .highlight .lightbox-target {
