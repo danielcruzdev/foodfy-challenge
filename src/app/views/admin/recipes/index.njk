@@ -2,7 +2,7 @@
 
 {% block filter %}
 <div class="filter">
-  <form action="/receitas" method="GET">
+  <form action="/admin/recipes" method="GET">
     <input
       type="text"
       name="filter"
@@ -36,13 +36,12 @@
         </div>
         {% endfor %}
     </section>
+
+    <div class="pagination" 
+        data-page={{pagination.page}} 
+        data-total={{pagination.total}} 
+        data-filter={{filter}}>
+    </div>
 </section>
 
-
-<div class="pagination" 
-    data-page={{pagination.page}} 
-    data-total={{pagination.total}} 
-    data-filter={{filter}}>
-</div>
-
-{% endblock %}
+{% endblock content%}

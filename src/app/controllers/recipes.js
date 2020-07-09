@@ -6,16 +6,18 @@ const RecipeFiles = require("../models/RecipeFiles");
 module.exports = {
   async index(req, res) {
     try {
-      let { page, limit } = req.query;
+      let { page, limit, filter} = req.query;
 
       page = page || 1;
-      limit = limit || 12;
+      limit = limit || 8;
 
       let offset = limit * (page - 1);
 
       const params = {
         limit,
         offset,
+        page,
+        filter
       };
 
       let recipes = (await Recipe.paginate(params)).rows;
@@ -41,12 +43,11 @@ module.exports = {
       recipes = recipesTemp;
 
       const pagination = {
-        totalPages:
-          recipes.length > 0 ? Math.ceil(recipes[0].total / limit) : 0,
+        total: recipes.length > 0 ? Math.ceil(recipes[0].total / limit) : 0,
         page,
       };
 
-      return res.render(`admin/recipes/index`, { recipes, pagination });
+      return res.render(`admin/recipes/index`, { recipes, pagination, filter });
     } catch (error) {
       throw new Error(error);
     }

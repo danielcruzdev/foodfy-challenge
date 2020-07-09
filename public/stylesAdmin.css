@@ -47,7 +47,6 @@ header .header {
 
 .manager-recipes {
   width: 940px;
-  height: 1000px;
   margin: 0 auto;
   text-align: left;
 }
@@ -779,6 +778,7 @@ header .filter form button {
   text-align: center;
   justify-self: center;
   padding-bottom: 40px;
+  height: 10px;
 }
 
 .pagination a, 
