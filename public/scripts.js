@@ -71,8 +71,8 @@ if (document.querySelector(".add-ingredient")) {
 //Paginação
 
 function paginate(selectedPage, totalPages) {
-  let pages = [],
-    oldPage;
+  let pages = []
+  let oldPage
 
   for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
     const firstAndLastPage = currentPage == 1 || currentPage == totalPages;

@@ -7,13 +7,14 @@
 }
 
 body {
+  flex: 1;
+  height: auto;
   background-color: white;
   font-family: 'Manrope', sans-serif;
   text-align: center;
   display: flex;
   flex-direction: column;
 }
-
 
 /* HEADER */
 
@@ -123,7 +124,7 @@ footer p {
 
 .main-recipes {
   width: 100%;
-  height: 1000px;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -773,12 +774,13 @@ header .filter form button {
 /* PAGINATION */
 
 .pagination{
-  margin: 0 auto;
+  margin: 10 auto;
   align-self: end;
   text-align: center;
   justify-self: center;
   padding-bottom: 40px;
   height: 10px;
+  padding-top: 25px;
 }
 
 .pagination a, 
